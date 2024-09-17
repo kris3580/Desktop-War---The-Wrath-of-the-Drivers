@@ -6,7 +6,7 @@ public class LoadingScene : MonoBehaviour
 {
     // instantiated values when opening the game
     public static string sceneToLoad = "Menu";
-    public static float timeToLoad = 3f;
+    public static float timeToLoad = 2f;
 
     private void Start()
     {
