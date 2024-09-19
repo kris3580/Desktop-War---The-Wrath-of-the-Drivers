@@ -8,6 +8,9 @@ public class MenuButtons : MonoBehaviour
     [SerializeField] GameObject mainMenuPanel;
     [SerializeField] GameObject settingsPanel;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject logoPanel;
+    [SerializeField] GameObject menuTagsTextDecoration;
+    [SerializeField] GameObject prepareInstallPanel;
 
     //MAIN MENU
     public void ExitGame()
@@ -44,12 +47,22 @@ public class MenuButtons : MonoBehaviour
 
     public void PrepareGame()
     {
+        logoPanel.SetActive(false);
+        menuTagsTextDecoration.SetActive(false);
+        mainMenuPanel.SetActive(false);
+        prepareInstallPanel.SetActive(true);
         StartCameraAnimation();
+
     }
 
     public void ClosePrepareGame()
     {
+        logoPanel.SetActive(true);
+        menuTagsTextDecoration.SetActive(true);
+        mainMenuPanel.SetActive(true);
+        prepareInstallPanel.SetActive(false);
         StartCameraAnimation();
+
     }
 
     [Header("Camera Animation")]
