@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,8 +27,8 @@ public class MenuPeripheralsSelection : MonoBehaviour
     private string headphonesDescription = "a masterpiece of human engineering";
     private string headphonesAbility1Name = "p_feedback";
     private string headphonesAbility2Name = "wave emitter";
-    private string headphonesAbilityDescription1 = "dont put a mic and a speaker next to eachother";
-    private string headphonesAbilityDescription2 = "used to send malitious information and other stuff";
+    private string headphonesAbilityDescription1 = "makes a sound so loud it acts as a shield";
+    private string headphonesAbilityDescription2 = "used to send malicious information and other stuff";
 
 
     private string keyboardDescription = "the right keyboard in the wrong hands could make all the difference in the world";
