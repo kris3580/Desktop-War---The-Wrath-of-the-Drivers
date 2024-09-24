@@ -13,8 +13,13 @@ public class PlayerTools : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitData, 100, layerToHit))
         {
             worldPosition = hitData.point;
+            worldPosition.z = 4.24f;
         }
 
         return worldPosition;
     }
+
+
+
+
 }

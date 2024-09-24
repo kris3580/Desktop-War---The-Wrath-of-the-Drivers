@@ -34,8 +34,7 @@ public class TeleportationAbility : MonoBehaviour
             timePassed = abilityDelay;
 
             Vector3 newPosition = playerTools.GetCursorToWorldPlanePosition();
-            newPosition.z = 4.24f;
-
+            
             transform.position = newPosition;
         }
     }
