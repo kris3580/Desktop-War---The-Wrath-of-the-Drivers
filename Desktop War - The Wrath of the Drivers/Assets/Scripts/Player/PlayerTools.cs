@@ -20,6 +20,32 @@ public class PlayerTools : MonoBehaviour
     }
 
 
+    public Vector3 GetSpamMailSpawnPosition(float offset)
+    {
+        Vector3 spawnPostion = transform.position;
 
+        if (GetCursorToWorldPlanePosition().x < transform.position.x)
+        {
+            spawnPostion.x -= offset;
+        }
+        else
+        {
+            spawnPostion.x += offset;
+        }
+        return spawnPostion;
+    }
+
+
+    public bool GetSpamMailSpawnDirection()
+    {
+        if (GetCursorToWorldPlanePosition().x < transform.position.x)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
 }

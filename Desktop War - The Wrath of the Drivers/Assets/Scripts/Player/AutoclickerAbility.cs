@@ -11,6 +11,7 @@ public class AutoclickerAbility : MonoBehaviour
     [SerializeField] float outerValue;
     GameObject cursorPrefab;
     [SerializeField] float cursorSpeed;
+    [SerializeField] float destroyCursorTimer;
 
     private void Start()
     {
@@ -43,24 +44,6 @@ public class AutoclickerAbility : MonoBehaviour
         AutoclickerCursor autoclickerCursor = objectCursor.GetComponent<AutoclickerCursor>();
         autoclickerCursor.speed = cursorSpeed;
         autoclickerCursor.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
-
+        autoclickerCursor.destroyTimer = destroyCursorTimer;
     }
-
-
-    private void OnDrawGizmos()
-    {
-        
-        if (playerTools != null)
-        {
-            Gizmos.color = Color.cyan;
-
-            Gizmos.DrawSphere(transform.position, 0.1f);
-
-            Gizmos.DrawSphere(playerTools.GetCursorToWorldPlanePosition(), 0.1f);
-
-            Vector3 outerVector = transform.position + (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized * outerValue;
-            Gizmos.DrawSphere(outerVector, 0.1f);
-        }
-    }
-
 }
