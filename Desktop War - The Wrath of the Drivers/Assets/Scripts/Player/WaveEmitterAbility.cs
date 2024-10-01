@@ -42,12 +42,6 @@ public class WaveEmitterAbility : MonoBehaviour
     {
         GameObject objectWave = Instantiate(wavePrefab, transform.position + (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized * outerValue, Quaternion.identity);
         WaveEmitterWave waveEmitterWave = objectWave.GetComponent<WaveEmitterWave>();
-
-        // handle rotation
-        //Quaternion waveRotation = Quaternion.LookRotation(waveEmitterWave.moveDirection);
-        //waveRotation.z = 90f;
-        //objectWave.transform.rotation = waveRotation;
-
         waveEmitterWave.speed = waveSpeed;
         waveEmitterWave.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
         waveEmitterWave.destroyTimer = destroyWaveTimer;

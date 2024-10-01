@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-public static class SceneMangement
+public static class SceneManagement
 {
     public static void LoadScene(string sceneToLoad, float timeToLoad)
     {

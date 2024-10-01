@@ -42,8 +42,5 @@ public class PFeedbackAbility : MonoBehaviour
             isShiledCurrentlyInUse = false;
             abilityDurationTimer = abilityDuration;
         }
-
-        Debug.Log(isShiledCurrentlyInUse);
-
     }
 }

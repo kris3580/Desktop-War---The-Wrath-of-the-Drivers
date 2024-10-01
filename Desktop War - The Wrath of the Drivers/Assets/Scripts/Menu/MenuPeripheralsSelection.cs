@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MenuPeripheralsSelection : MonoBehaviour
 {
-    public static PeripheralType? selectedPeripheral;
+    
     public static bool hasPeripheralBeenSelected = false;
 
     private GameObject selectedPeripheralDescriptionPanel;
@@ -94,7 +94,7 @@ public class MenuPeripheralsSelection : MonoBehaviour
     private void ExitHoverPeripheralHandler()
     {
         animator.SetBool("isHovered", false);
-        SetPeripheralDescriptions(selectedPeripheral.ToString(), true);
+        SetPeripheralDescriptions(PeripheralTypeHandler.selectedPeripheral.ToString(), true);
     }
 
     private void ClickedPeripheralHandler()
@@ -106,9 +106,9 @@ public class MenuPeripheralsSelection : MonoBehaviour
 
         switch (gameObject.name)
         {
-            case "Headphones": selectedPeripheral = PeripheralType.Headphones; break;
-            case "Keyboard": selectedPeripheral = PeripheralType.Keyboard; break;
-            case "Mouse": selectedPeripheral = PeripheralType.Mouse; break;
+            case "Headphones": PeripheralTypeHandler.selectedPeripheral = PeripheralType.Headphones; break;
+            case "Keyboard": PeripheralTypeHandler.selectedPeripheral = PeripheralType.Keyboard; break;
+            case "Mouse": PeripheralTypeHandler.selectedPeripheral = PeripheralType.Mouse; break;
         }
     }
 
@@ -130,13 +130,13 @@ public class MenuPeripheralsSelection : MonoBehaviour
     {
         DisableAllPeripheralsOutlines();
         installButton.interactable = false;
-        selectedPeripheral = null;
+        PeripheralTypeHandler.selectedPeripheral = null;
         selectedPeripheralDescriptionPanel.SetActive(false);
     }
 
     private void SetPeripheralDescriptions(string whichDescription, bool isOnExit = false)
     {
-        if (selectedPeripheral == null && isOnExit)
+        if (PeripheralTypeHandler.selectedPeripheral == null && isOnExit)
         {
             selectedPeripheralDescriptionPanel.SetActive(false);
             return;

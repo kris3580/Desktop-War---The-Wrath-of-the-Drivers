@@ -14,7 +14,7 @@ public class MenuButtons : MonoBehaviour
     //MAIN MENU
     public void ExitGame()
     {
-        SceneMangement.LoadScene("EXIT GAME!", 1f);
+        SceneManagement.LoadScene("EXIT GAME!", 1f);
     }
 
     public void OpenSettings()
@@ -101,6 +101,11 @@ public class MenuButtons : MonoBehaviour
         }
 
         isInMainMenu = !isInMainMenu;
+    }
+
+    public void Install()
+    {
+        SceneManagement.LoadScene("GameplayTesting", 2f);
     }
 
     private void Start()

@@ -1,17 +1,31 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthSystem : MonoBehaviour
 {
 
     [SerializeField] int currentHealth;
-    [SerializeField] int maxHealth;
+    public int maxHealth;
     [SerializeField] float delayHealthRemovalTimer;
     private float currentDelayHealthRemovalTimer = 0f;
     public bool isSystemActive = true;
+    private int currentMaxHealth;
+
+    private void Start()
+    {
+        currentMaxHealth = maxHealth;
+    }
 
     private void Update()
     {
         currentDelayHealthRemovalTimer -= Time.deltaTime;
+
+        if(currentMaxHealth != maxHealth)
+        {
+            currentMaxHealth = maxHealth;
+            currentHealth = maxHealth;
+        }
+
     }
 
 
@@ -33,6 +47,11 @@ public class HealthSystem : MonoBehaviour
             currentHealth--;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
             Destroy(bulletToRemove);
+        }
+
+        if(currentHealth <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
         }
     }
 

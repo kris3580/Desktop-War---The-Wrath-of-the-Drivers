@@ -10,7 +10,6 @@ public class WaveEmitterWave: MonoBehaviour
     private void Start()
     {
         transform.rotation = Quaternion.LookRotation(moveDirection);
-        
     }
 
     void Update()
