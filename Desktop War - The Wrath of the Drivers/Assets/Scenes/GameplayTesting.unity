@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.103853196, g: 0.10192467, b: 0.07994184, a: 1}
+  m_IndirectSpecularColor: {r: 0.10385301, g: 0.10192462, b: 0.07994178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3025,6 +3025,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityDelay: 1
   isAbilityActive: 1
+  outerValue: 1.4
+  waveSpeed: 2
+  destroyWaveTimer: 1
 --- !u!120 &8919333678040602749
 LineRenderer:
   serializedVersion: 2

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4646389044774797900}
   - component: {fileID: 1263228683118702201}
   - component: {fileID: 8711512788201872023}
+  - component: {fileID: 8196588870667734190}
   m_Layer: 0
   m_Name: WaveEmitter_Wave
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011807811716516599}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1, y: 4.9, z: 4.255}
-  m_LocalScale: {x: 1.5, y: 0.10421051, z: 0.98999983}
+  m_LocalScale: {x: 0.098200865, y: 0.71776867, z: 1.3448803}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4646389044774797900
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -105,3 +106,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.0000002, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8196588870667734190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011807811716516599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117a85b312effee4391f962361144fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
+  speed: 0
+  destroyTimer: 0

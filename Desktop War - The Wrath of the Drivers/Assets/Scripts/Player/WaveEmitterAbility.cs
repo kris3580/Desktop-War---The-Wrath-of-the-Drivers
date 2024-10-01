@@ -5,16 +5,26 @@ public class WaveEmitterAbility : MonoBehaviour
     [SerializeField] float abilityDelay = 1f;
     private float timePassed = 0;
     public bool isAbilityActive = true;
-    private GameObject wavePrefab;
+    private PlayerTools playerTools;
 
+    [SerializeField] float outerValue;
+    private GameObject wavePrefab;
+    [SerializeField] float waveSpeed;
+    [SerializeField] float destroyWaveTimer;
 
     private void Start()
     {
+        playerTools = GetComponent<PlayerTools>();
         wavePrefab = Resources.Load<GameObject>("WaveEmitter_Wave");
     }
 
 
     private void Update()
+    {
+        WaveEmitterHandler();
+    }
+
+    private void WaveEmitterHandler()
     {
         if (!isAbilityActive) return;
 
@@ -23,18 +33,24 @@ public class WaveEmitterAbility : MonoBehaviour
         if (Input.GetMouseButton(0) && timePassed <= 0)
         {
             timePassed = abilityDelay;
-
             ShootWave();
 
         }
     }
 
-
     private void ShootWave()
     {
-        //GameObject waveObject = Instantiate(wavePrefab, GetSpamMailSpawnPosition(xSpawnOffset), Quaternion.Euler(-90, 0, 0));
-        //SpamMail spamMail = objectSpamMail.GetComponent<SpamMail>();
-        //spamMail.direction = GetSpamMailSpawnDirection();
+        GameObject objectWave = Instantiate(wavePrefab, transform.position + (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized * outerValue, Quaternion.identity);
+        WaveEmitterWave waveEmitterWave = objectWave.GetComponent<WaveEmitterWave>();
+
+        // handle rotation
+        //Quaternion waveRotation = Quaternion.LookRotation(waveEmitterWave.moveDirection);
+        //waveRotation.z = 90f;
+        //objectWave.transform.rotation = waveRotation;
+
+        waveEmitterWave.speed = waveSpeed;
+        waveEmitterWave.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
+        waveEmitterWave.destroyTimer = destroyWaveTimer;
     }
 
 }
