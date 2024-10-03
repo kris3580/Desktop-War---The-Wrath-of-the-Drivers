@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PeripheralTypeHandler : MonoBehaviour
 {
@@ -26,7 +25,18 @@ public class PeripheralTypeHandler : MonoBehaviour
 
     [SerializeField] GameObject teleportationLineRenderer;
 
-    private bool hasPeripheralBeenInitialized = false; 
+    private bool hasPeripheralBeenInitialized = false;
+
+
+    [SerializeField] Image healthBarImage;
+    [SerializeField] Image specialDelayBarImage;
+
+    [SerializeField] Color mouseHealthBarColor;
+    [SerializeField] Color mouseSpecialDelayBarColor;
+    [SerializeField] Color keyboardHealthBarColor;
+    [SerializeField] Color keyboardSpecialDelayBarColor;
+    [SerializeField] Color headphonesHealthBarColor;
+    [SerializeField] Color headphonesSpecialDelayBarColor;
 
     private void Update()
     {
@@ -87,6 +97,8 @@ public class PeripheralTypeHandler : MonoBehaviour
                     movement.moveSpeed = mouseSpeed;
                     healthSystem.maxHealth = mouseMaxHealth;
                     teleportationLineRenderer.SetActive(true);
+                    healthBarImage.color = mouseHealthBarColor;
+                    specialDelayBarImage.color = mouseSpecialDelayBarColor;
                     break;
 
                 case PeripheralType.Keyboard:
@@ -99,6 +111,8 @@ public class PeripheralTypeHandler : MonoBehaviour
                     movement.moveSpeed = keyboardSpeed;
                     healthSystem.maxHealth = keyboardMaxHealth;
                     teleportationLineRenderer.SetActive(false);
+                    healthBarImage.color = keyboardHealthBarColor;
+                    specialDelayBarImage.color = keyboardSpecialDelayBarColor;
                     break;
 
                 case PeripheralType.Headphones:
@@ -109,8 +123,10 @@ public class PeripheralTypeHandler : MonoBehaviour
                     pFeedbackAbility.enabled = true;
                     waveEmitterAbility.enabled = true;
                     movement.moveSpeed = headphonesSpeed;
-                    healthSystem.maxHealth = keyboardMaxHealth;
+                    healthSystem.maxHealth = headphonesMaxHealth;
                     teleportationLineRenderer.SetActive(false);
+                    healthBarImage.color = headphonesHealthBarColor;
+                    specialDelayBarImage.color = headphonesSpecialDelayBarColor;
                     break;
             }
         }
@@ -123,6 +139,33 @@ public class PeripheralTypeHandler : MonoBehaviour
             selectedPeripheral = 0;
         }
     }
+
+    public float GetSpecialAbilityCurrentDelayTime()
+    {
+        switch (currentPeripheral)
+        {
+            case PeripheralType.Mouse: return teleportationAbility.timePassed;
+            case PeripheralType.Keyboard: return altFInfintyAbility.currentAbilityTimer;
+            case PeripheralType.Headphones: return pFeedbackAbility.timePassed;
+        }
+        return 0;
+    }
+
+
+    public float GetSpecialAbilityDelayTime()
+    {
+        switch (currentPeripheral)
+        {
+            case PeripheralType.Mouse: return teleportationAbility.abilityDelay;
+            case PeripheralType.Keyboard: return altFInfintyAbility.delayAbilityTimer;
+            case PeripheralType.Headphones: return pFeedbackAbility.abilityDelay;
+        }
+        return 0;
+    }
+
+
+
+
 
 
 

@@ -4,8 +4,8 @@ public class PFeedbackAbility : MonoBehaviour
 {
     public bool isAbilityActive = true;
 
-    [SerializeField] float abilityDelay;
-    private float timePassed = 0f;
+    [SerializeField] public float abilityDelay;
+    public float timePassed = 0f;
     Collider shieldCollider;
     public static bool isShiledCurrentlyInUse = false;
 

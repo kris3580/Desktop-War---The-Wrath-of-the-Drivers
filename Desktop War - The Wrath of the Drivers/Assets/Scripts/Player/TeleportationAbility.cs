@@ -3,8 +3,8 @@ using UnityEngine;
 public class TeleportationAbility : MonoBehaviour
 {
 
-    [SerializeField] float abilityDelay = 5f;
-    private float timePassed = 0;
+    [SerializeField] public float abilityDelay = 5f;
+    public float timePassed = 0;
     public bool isAbilityActive = true;
     private PlayerTools playerTools;
     [SerializeField] LineRenderer lineRenderer;
@@ -40,11 +40,15 @@ public class TeleportationAbility : MonoBehaviour
     }
     private void TeleportationLineHandler()
     {
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, playerTools.GetCursorToWorldPlanePosition());
+        if(timePassed <= 0)
+        {
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, playerTools.GetCursorToWorldPlanePosition());
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
     }
-
-
-
-   
 }

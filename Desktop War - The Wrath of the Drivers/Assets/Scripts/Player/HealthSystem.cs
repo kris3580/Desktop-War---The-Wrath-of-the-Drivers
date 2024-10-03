@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class HealthSystem : MonoBehaviour
 {
 
-    [SerializeField] int currentHealth;
+    [SerializeField] public int currentHealth;
     public int maxHealth;
     [SerializeField] float delayHealthRemovalTimer;
     private float currentDelayHealthRemovalTimer = 0f;

@@ -13,8 +13,8 @@ public class AltFInfintyAbility : MonoBehaviour
 
     private float previousSpeed;
 
-    [SerializeField] float delayAbilityTimer;
-    float currentAbilityTimer = 0f;
+    [SerializeField] public float delayAbilityTimer;
+    public float currentAbilityTimer = 0f;
     private bool isAbilityCurrentlyInUse = false;
 
     private void Start()
