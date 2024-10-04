@@ -7,6 +7,10 @@ public class WaveEmitterWave: MonoBehaviour
     public float speed;
     public float destroyTimer;
 
+    [SerializeField] public int baseDamage;
+    public int extraDamage;
+
+
     private void Start()
     {
         transform.rotation = Quaternion.LookRotation(moveDirection);
@@ -23,5 +27,11 @@ public class WaveEmitterWave: MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public int GetDamage()
+    {
+        return 0;
+    }
+
 }
 

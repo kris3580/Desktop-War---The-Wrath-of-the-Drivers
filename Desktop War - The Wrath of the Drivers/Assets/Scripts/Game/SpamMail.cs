@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class SpamMail : MonoBehaviour
 {
@@ -7,6 +6,10 @@ public class SpamMail : MonoBehaviour
     public bool direction;
     public float speed;
     public float destroyTimer;
+
+    [SerializeField] public int baseDamage;
+    public int extraDamage;
+
 
     void Update()
     {
@@ -29,7 +32,10 @@ public class SpamMail : MonoBehaviour
         }
     }
 
-
+    public int GetDamage()
+    {
+        return 0;
+    }
 
 
 

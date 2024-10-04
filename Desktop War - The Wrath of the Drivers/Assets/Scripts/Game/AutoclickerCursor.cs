@@ -7,6 +7,11 @@ public class AutoclickerCursor : MonoBehaviour
     public float speed;
     public float destroyTimer;
 
+    [SerializeField] public int baseDamage;
+    public int extraDamage;
+
+
+
     void Update()
     {
         transform.position += moveDirection * Time.deltaTime * speed;
@@ -17,4 +22,10 @@ public class AutoclickerCursor : MonoBehaviour
             Destroy(gameObject);
         } 
     }
+
+    public int GetDamage()
+    {
+        return 0;
+    }
+
 }
