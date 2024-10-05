@@ -121,3 +121,5 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   speed: 0
   destroyTimer: 0
+  baseDamage: 20
+  extraDamage: 0

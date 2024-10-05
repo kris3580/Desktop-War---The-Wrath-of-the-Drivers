@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageText : MonoBehaviour
 {
+    [SerializeField] float xRandomSpawnPositionMin, xRandomSpawnPositionMax, yRandomSpawnPositionMin, yRandomSpawnPositionMax, zRandomSpawnPositionMin, zRandomSpawnPositionMax;
+
 
     void Start()
     {
@@ -17,13 +19,18 @@ public class DamageText : MonoBehaviour
     }
 
 
-    public void SetupText(int damage)
+    public void SetupText(int damage, Color color)
     {
-        transform.Find("Text").GetComponent<TextMeshProUGUI>().text = damage.ToString();
-        float randomSpawnPostionX = Random.Range(-0.4f, 0.6f);
-        float randomSpawnPostionY = Random.Range(-0.3f, 0.5f);
+        TextMeshProUGUI damageText = transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-        transform.localPosition = new Vector3(randomSpawnPostionX, randomSpawnPostionY, transform.localPosition.z);
+        damageText.text = damage.ToString();
+        damageText.color = color;
+
+        float randomSpawnPostionX = Random.Range(xRandomSpawnPositionMin, xRandomSpawnPositionMax);
+        float randomSpawnPostionY = Random.Range(yRandomSpawnPositionMin, yRandomSpawnPositionMax);
+        float randomSpawnPostionZ = Random.Range(zRandomSpawnPositionMin, zRandomSpawnPositionMax);
+
+        transform.localPosition = new Vector3(randomSpawnPostionX, randomSpawnPostionY, randomSpawnPostionZ);
     }
 
 

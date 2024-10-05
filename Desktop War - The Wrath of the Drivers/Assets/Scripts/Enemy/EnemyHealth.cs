@@ -12,6 +12,8 @@ public class EnemyHealth : MonoBehaviour
     private GameObject damageTextPrefab;
     public Canvas canvas;
 
+    [SerializeField] Color damageTextColor;
+
     private void Start()
     {
         damageTextPrefab = Resources.Load<GameObject>("DamageText");
@@ -68,6 +70,6 @@ public class EnemyHealth : MonoBehaviour
     private void SpawnDamageText(int healthToRemove)
     {
         GameObject damageText = Instantiate(damageTextPrefab, canvas.transform);
-        damageText.GetComponent<DamageText>().SetupText(healthToRemove);
+        damageText.GetComponent<DamageText>().SetupText(healthToRemove, damageTextColor);
     }
 }

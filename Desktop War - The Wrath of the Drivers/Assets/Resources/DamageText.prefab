@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2898147932455538512}
   - component: {fileID: 8975330550325066932}
   - component: {fileID: 7546540169702303970}
+  - component: {fileID: 3351789017380651550}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -75,7 +76,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 486539263
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -135,6 +136,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!111 &3351789017380651550
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730299668660346260}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 649eb181ad77fbd48a160dd90a9f578b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 649eb181ad77fbd48a160dd90a9f578b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1971497969115014660
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +161,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5803040335520383158}
-  - component: {fileID: 8457073363283741157}
   - component: {fileID: 7509821916907442796}
   m_Layer: 0
   m_Name: DamageText
@@ -173,22 +189,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00000047683716, y: 0}
   m_SizeDelta: {x: 5.3727403, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!111 &8457073363283741157
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971497969115014660}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 649eb181ad77fbd48a160dd90a9f578b, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 649eb181ad77fbd48a160dd90a9f578b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &7509821916907442796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,3 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a302e22842e136489d5ed8e2d97363a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xRandomSpawnPositionMin: -0.6
+  xRandomSpawnPositionMax: 0.8
+  yRandomSpawnPositionMin: -0.4
+  yRandomSpawnPositionMax: 0.4
+  zRandomSpawnPositionMin: -0.5
+  zRandomSpawnPositionMax: 0

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,7 @@ public class HealthSystem : MonoBehaviour
         {
             currentMaxHealth = maxHealth;
             currentHealth = maxHealth;
+            UpdateInstability();
         }
 
     }
@@ -46,6 +48,7 @@ public class HealthSystem : MonoBehaviour
         {
             currentHealth--;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
+            UpdateInstability();
             Destroy(bulletToRemove);
         }
 
@@ -54,5 +57,16 @@ public class HealthSystem : MonoBehaviour
             SceneManager.LoadScene("GameOver");
         }
     }
+
+
+    [SerializeField] TextMeshProUGUI instabilityText;
+
+    private void UpdateInstability()
+    {
+        float percentage = (float)currentHealth / (float)currentMaxHealth * 100f;
+        instabilityText.text = $"DRIVER_INSTABILITY: {percentage}%";
+
+    }
+
 
 }

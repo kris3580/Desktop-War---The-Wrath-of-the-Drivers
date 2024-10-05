@@ -8,7 +8,7 @@ public class SpamAbility : MonoBehaviour
     private GameObject spamPrefab;
 
     [SerializeField] float abilityDelay;
-    private float timePassed = 0f;
+    public float timePassed = 0f;
 
     [SerializeField] float xSpawnOffset;
     [SerializeField] float spamMailSpeed;

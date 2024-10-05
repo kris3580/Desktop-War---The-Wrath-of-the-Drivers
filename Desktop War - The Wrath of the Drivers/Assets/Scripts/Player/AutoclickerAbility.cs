@@ -4,7 +4,7 @@ public class AutoclickerAbility : MonoBehaviour
 {
 
     [SerializeField] float abilityDelay = 0.5f;
-    private float timePassed = 0;
+    public float timePassed = 0;
     public bool isAbilityActive = true;
     private PlayerTools playerTools;
 

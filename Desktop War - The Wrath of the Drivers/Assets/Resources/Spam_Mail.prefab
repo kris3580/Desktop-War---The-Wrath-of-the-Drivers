@@ -121,3 +121,5 @@ MonoBehaviour:
   direction: 0
   speed: 0
   destroyTimer: 0
+  baseDamage: 100
+  extraDamage: 0

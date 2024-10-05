@@ -1,6 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class PeripheralTypeHandler : MonoBehaviour
 {
     public static PeripheralType? selectedPeripheral;
@@ -27,7 +28,6 @@ public class PeripheralTypeHandler : MonoBehaviour
 
     private bool hasPeripheralBeenInitialized = false;
 
-
     [SerializeField] Image healthBarImage;
     [SerializeField] Image specialDelayBarImage;
 
@@ -39,6 +39,13 @@ public class PeripheralTypeHandler : MonoBehaviour
     [SerializeField] Color headphonesSpecialDelayBarColor;
 
     private void Update()
+    {
+        InputPeripheralSwitch();
+        PeripheralSwitchHandler();
+        UpdateCanvasPeripheralData();
+    }
+
+    private void InputPeripheralSwitch()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -52,8 +59,6 @@ public class PeripheralTypeHandler : MonoBehaviour
         {
             currentPeripheral = PeripheralType.Headphones;
         }
-
-        PeripheralSwitchHandler();
     }
 
     private void Start()
@@ -166,6 +171,26 @@ public class PeripheralTypeHandler : MonoBehaviour
 
 
 
+    [SerializeField] TextMeshProUGUI injectionDelayText, protectionDelayText, driverTypeText;
+
+    void UpdateCanvasPeripheralData()
+    {
+        driverTypeText.text = $"DRIVER_TYPE: {currentPeripheral.ToString().ToUpper()}";
+        protectionDelayText.text = $"DRIVER_PROTECTION_DELAY: {Math.Round(Mathf.Clamp(GetSpecialAbilityCurrentDelayTime(), 0, float.MaxValue), 3)}";
+        injectionDelayText.text = $"DRIVER_INJECTION_DELAY: {Math.Round(Mathf.Clamp(GetAttackAbilityDelayTime(), 0, float.MaxValue), 3)}";
+    }
+
+
+    public float GetAttackAbilityDelayTime()
+    {
+        switch (currentPeripheral)
+        {
+            case PeripheralType.Mouse: return autoclickerAbility.timePassed;
+            case PeripheralType.Keyboard: return spamAbility.timePassed;
+            case PeripheralType.Headphones: return waveEmitterAbility.timePassed;
+        }
+        return 0;
+    }
 
 
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class WaveEmitterAbility : MonoBehaviour
 {
     [SerializeField] float abilityDelay = 1f;
-    private float timePassed = 0;
+    public float timePassed = 0;
     public bool isAbilityActive = true;
     private PlayerTools playerTools;
 

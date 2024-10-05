@@ -30,7 +30,14 @@ public class WaveEmitterWave: MonoBehaviour
 
     public int GetDamage()
     {
-        return 0;
+        int randomPercentageIndex = Random.Range(0, 10);
+        int randomPercentage = 0;
+
+        if (0 <= randomPercentageIndex && randomPercentageIndex <= 5) randomPercentage = 25;
+        else if (6 <= randomPercentageIndex && randomPercentageIndex <= 9) randomPercentage = 50;
+        else if (randomPercentageIndex == 10) randomPercentage = 100;
+
+        return Random.Range(baseDamage + extraDamage, baseDamage + extraDamage + (baseDamage + extraDamage) * randomPercentage / 100);
     }
 
 }
