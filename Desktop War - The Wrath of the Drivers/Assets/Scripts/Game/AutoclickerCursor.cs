@@ -32,7 +32,10 @@ public class AutoclickerCursor : MonoBehaviour
         else if (6 <= randomPercentageIndex && randomPercentageIndex <= 9) randomPercentage = 50;
         else if (randomPercentageIndex == 10) randomPercentage = 200;
 
-        return Random.Range(baseDamage + extraDamage, baseDamage + extraDamage + (baseDamage + extraDamage) * randomPercentage / 100);
+        int damage = Random.Range(baseDamage + extraDamage, baseDamage + extraDamage + (baseDamage + extraDamage) * randomPercentage / 100);
+        
+
+        return damage;
     }
 
 }

@@ -134,6 +134,9 @@ public class PeripheralTypeHandler : MonoBehaviour
                     specialDelayBarImage.color = headphonesSpecialDelayBarColor;
                     break;
             }
+
+            DamagePerSecond.ResetDPSCounter();
+
         }
     }
 

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -9,9 +10,18 @@ public class Movement : MonoBehaviour
     [SerializeField] Vector2 xClamp;
     [SerializeField] Vector2 yClamp;
 
+    [SerializeField] TextMeshProUGUI controlsText;
+
     void Update()
     {
         MovementHandler();
+        MovementStatusTextHandler();
+    }
+
+    private void MovementStatusTextHandler()
+    {
+        if (!isFrozen) controlsText.text = "DRIVER_CONTROLS: OPERATIONAL";
+        else controlsText.text = "DRIVER_CONTROLS: DOWN";
     }
 
     private void MovementHandler()

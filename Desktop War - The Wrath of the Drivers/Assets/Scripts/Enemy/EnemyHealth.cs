@@ -33,15 +33,15 @@ public class EnemyHealth : MonoBehaviour
             if(other.GetComponent<AutoclickerCursor>() != null)
             {
                 Destroy(other.gameObject);
-                RemoveHealth(other.GetComponent<AutoclickerCursor>().GetDamage());
+                RemoveHealth(other.GetComponent<AutoclickerCursor>().GetDamage(), true);
             }
             else if (other.GetComponent<SpamMail>() != null)
             {
-                RemoveHealth(other.GetComponent<SpamMail>().GetDamage());
+                RemoveHealth(other.GetComponent<SpamMail>().GetDamage(), false);
             }
             else if (other.GetComponent<WaveEmitterWave>() != null)
             {
-                RemoveHealth(other.GetComponent<WaveEmitterWave>().GetDamage());
+                RemoveHealth(other.GetComponent<WaveEmitterWave>().GetDamage(), false);
             }
 
 
@@ -50,14 +50,15 @@ public class EnemyHealth : MonoBehaviour
     }
     
 
-    private void RemoveHealth(int healthToRemove)
+    private void RemoveHealth(int healthToRemove, bool toIgnoreHealthRemovalTimer)
     {
-        if (currentDelayHealthRemovalTimer <= 0 && isSystemActive)
+        if ((currentDelayHealthRemovalTimer <= 0 || toIgnoreHealthRemovalTimer) && isSystemActive)
         {
             currentHealth -= healthToRemove;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
 
             SpawnDamageText(healthToRemove);
+            DamagePerSecond.AddToDPSCounter(healthToRemove);
 
         }
 

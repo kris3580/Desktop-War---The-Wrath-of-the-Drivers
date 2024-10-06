@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -25,9 +26,10 @@ public class HealthSystem : MonoBehaviour
         {
             currentMaxHealth = maxHealth;
             currentHealth = maxHealth;
-            UpdateInstability();
+            UpdateInstability(true);
         }
 
+        UpdateInstability(false);
     }
 
 
@@ -36,9 +38,7 @@ public class HealthSystem : MonoBehaviour
         if (other.tag == "Bullet")
         {
             RemoveHealth(other.gameObject);
-            Debug.Log(currentHealth);
         }
-
     }
 
 
@@ -48,7 +48,7 @@ public class HealthSystem : MonoBehaviour
         {
             currentHealth--;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
-            UpdateInstability();
+            UpdateInstability(true);
             Destroy(bulletToRemove);
         }
 
@@ -59,13 +59,36 @@ public class HealthSystem : MonoBehaviour
     }
 
 
-    [SerializeField] TextMeshProUGUI instabilityText;
+    [SerializeField] TextMeshProUGUI stabilityText;
+    private float timePassedForInstability = 0f;
+    public float instabilityDefaultTime = 2f;
 
-    private void UpdateInstability()
+    private void UpdateInstability(bool updateInstantly)
     {
-        float percentage = (float)currentHealth / (float)currentMaxHealth * 100f;
-        instabilityText.text = $"DRIVER_INSTABILITY: {percentage}%";
+        timePassedForInstability += Time.deltaTime;
 
+        float percentage = (float)currentHealth / (float)currentMaxHealth * 100f;
+        percentage = (float)Math.Floor(percentage);
+
+        int randomNumber = UnityEngine.Random.Range(0, 10);
+        
+        if (timePassedForInstability > instabilityDefaultTime || updateInstantly)
+        {
+            timePassedForInstability = 0;
+
+            if (randomNumber == 0)
+            {
+                stabilityText.text = $"DRIVER_STABILITY: {percentage - 2}%";
+            }
+            else if (randomNumber >= 7)
+            {
+                stabilityText.text = $"DRIVER_STABILITY: {percentage - 1}%";
+            }
+            else
+            {
+                stabilityText.text = $"DRIVER_STABILITY: {percentage}%";
+            }
+        }
     }
 
 
