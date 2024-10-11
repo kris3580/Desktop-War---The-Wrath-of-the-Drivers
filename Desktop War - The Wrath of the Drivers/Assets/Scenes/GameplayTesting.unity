@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.103853196, g: 0.10192467, b: 0.07994184, a: 1}
+  m_IndirectSpecularColor: {r: 0.10385301, g: 0.10192462, b: 0.07994178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 193322473}
   - component: {fileID: 193322472}
   - component: {fileID: 193322478}
+  - component: {fileID: 193322479}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -175,6 +176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5110fe3f191aab546b6b69217f0d7f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPositions:
+  - {x: 4, y: 4, z: 4.103}
+  hasMovementTargetPositionStarted: 00
+  hasMovementTargetPositionReached: 00
+  speed: 0.5
 --- !u!65 &193322474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -290,6 +296,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &193322479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193322471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951d3d5d570c8704aa567141ed382547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &194202083
 GameObject:
   m_ObjectHideFlags: 0
