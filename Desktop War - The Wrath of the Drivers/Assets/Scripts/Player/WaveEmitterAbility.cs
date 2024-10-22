@@ -30,7 +30,7 @@ public class WaveEmitterAbility : MonoBehaviour
 
         timePassed -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && timePassed <= 0)
+        if (Input.GetMouseButton(0) && timePassed <= 0 && !Pause.isPaused)
         {
             timePassed = abilityDelay;
             ShootWave();

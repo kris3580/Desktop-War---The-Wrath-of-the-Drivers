@@ -29,7 +29,7 @@ public class AltFInfintyAbility : MonoBehaviour
     {
         currentAbilityTimer -= Time.deltaTime;
 
-        if (currentAbilityTimer <= 0 && isAbilityActive && Input.GetMouseButtonDown(1))
+        if (currentAbilityTimer <= 0 && isAbilityActive && Input.GetMouseButtonDown(1) && !Pause.isPaused)
         {
             currentAbilityTimer = delayAbilityTimer;
             movement.moveSpeed = changedSpeed;

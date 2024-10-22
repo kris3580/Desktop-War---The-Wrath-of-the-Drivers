@@ -26,7 +26,7 @@ public class PFeedbackAbility : MonoBehaviour
 
         timePassed -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(1) && timePassed <= 0)
+        if (Input.GetMouseButtonDown(1) && timePassed <= 0 && !Pause.isPaused)
         {
             isShiledCurrentlyInUse = true;
             timePassed = abilityDelay;

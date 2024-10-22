@@ -29,7 +29,7 @@ public class TeleportationAbility : MonoBehaviour
 
         timePassed -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(1) && timePassed <= 0)
+        if (Input.GetMouseButtonDown(1) && timePassed <= 0 && !Pause.isPaused)
         {
             timePassed = abilityDelay;
 
@@ -40,6 +40,13 @@ public class TeleportationAbility : MonoBehaviour
     }
     private void TeleportationLineHandler()
     {
+
+        if (Pause.isPaused)
+        {
+            lineRenderer.enabled = false;
+            return;
+        }
+
         if(timePassed <= 0)
         {
             lineRenderer.enabled = true;
