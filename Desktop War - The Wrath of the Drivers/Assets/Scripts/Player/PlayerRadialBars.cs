@@ -5,8 +5,8 @@ public class PlayerRadialBars : MonoBehaviour
 {
     PeripheralTypeHandler peripheralTypeHandler;
     HealthSystem healthSystem;
-    [SerializeField] Image healthBarImage;
-    [SerializeField] Image specialDelayBarImage;
+    [SerializeField] public Image healthBarImage;
+    [SerializeField] public Image specialDelayBarImage;
 
 
     private void Start()

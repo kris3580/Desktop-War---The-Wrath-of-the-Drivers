@@ -7,7 +7,7 @@ public class TeleportationAbility : MonoBehaviour
     public float timePassed = 0;
     public bool isAbilityActive = true;
     private PlayerTools playerTools;
-    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] public LineRenderer lineRenderer;
 
     private void Start()
     {
@@ -41,7 +41,7 @@ public class TeleportationAbility : MonoBehaviour
     private void TeleportationLineHandler()
     {
 
-        if (Pause.isPaused)
+        if (Pause.isPaused || Store.isInStore)
         {
             lineRenderer.enabled = false;
             return;

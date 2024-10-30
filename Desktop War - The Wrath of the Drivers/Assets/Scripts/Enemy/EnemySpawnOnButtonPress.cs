@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Temporary_EnemySpawnOnButtonPress : MonoBehaviour
+public class EnemySpawnOnButtonPress : MonoBehaviour
 {
     [SerializeField] GameObject enemy;
 

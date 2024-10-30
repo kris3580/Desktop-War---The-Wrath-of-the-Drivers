@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 public class PeripheralTypeHandler : MonoBehaviour
 {
     public static PeripheralType? selectedPeripheral;
@@ -37,6 +38,8 @@ public class PeripheralTypeHandler : MonoBehaviour
     [SerializeField] Color keyboardSpecialDelayBarColor;
     [SerializeField] Color headphonesHealthBarColor;
     [SerializeField] Color headphonesSpecialDelayBarColor;
+
+    
 
     private void Update()
     {
@@ -79,6 +82,20 @@ public class PeripheralTypeHandler : MonoBehaviour
         PeripheralSwitchHandler();
     }
 
+
+    public void AllAbilitiesActivityHandler(bool stateToSwitchTo)
+    {
+        teleportationAbility.isAbilityActive = stateToSwitchTo;
+        autoclickerAbility.isAbilityActive = stateToSwitchTo;
+        altFInfintyAbility.isAbilityActive = stateToSwitchTo; 
+        spamAbility.isAbilityActive = stateToSwitchTo; 
+        pFeedbackAbility.isAbilityActive = stateToSwitchTo; 
+        waveEmitterAbility.isAbilityActive = stateToSwitchTo; 
+
+        PlayerRadialBars playerRadialBars = FindObjectOfType<PlayerRadialBars>();
+        playerRadialBars.healthBarImage.enabled = stateToSwitchTo;
+        playerRadialBars.specialDelayBarImage.enabled = stateToSwitchTo;
+    }
 
 
     void PeripheralSwitchHandler()

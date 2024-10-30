@@ -19,6 +19,8 @@ public class MenuButtons : MonoBehaviour
 
     public void OpenSettings()
     {
+        StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
+
         mainMenuPanel.SetActive(false);
 
         if(Screen.fullScreen == true) SettingsManager.isFullscreenOn = 1;
@@ -34,6 +36,8 @@ public class MenuButtons : MonoBehaviour
 
     public void OpenCredits()
     {
+        StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
+
         mainMenuPanel.SetActive(false);
         creditsPanel.SetActive(true);
     }
@@ -46,6 +50,8 @@ public class MenuButtons : MonoBehaviour
 
     public void PrepareGame()
     {
+        StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
+
         logoPanel.SetActive(false);
         menuTagsTextDecoration.SetActive(false);
         mainMenuPanel.SetActive(false);

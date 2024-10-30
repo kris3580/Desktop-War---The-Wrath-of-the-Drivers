@@ -11,7 +11,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] float delayHealthRemovalTimer;
     private float currentDelayHealthRemovalTimer = 0f;
     public bool isSystemActive = true;
-    private int currentMaxHealth;
+    public int currentMaxHealth;
 
     private void Start()
     {
