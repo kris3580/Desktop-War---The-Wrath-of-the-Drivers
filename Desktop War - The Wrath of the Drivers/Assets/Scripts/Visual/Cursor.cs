@@ -32,7 +32,7 @@ public class Cursor : MonoBehaviour
         {
             SetCursor("loadingCursor");
         }
-        else if (activeSceneName == "GameplayTesting" || activeSceneName == "Menu")
+        else if (activeSceneName == "Game" || activeSceneName == "Menu")
         {
             StartCoroutine(DelayedReturnToDefaultCursor());
         }

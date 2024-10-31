@@ -7,12 +7,14 @@ public class SpamAbility : MonoBehaviour
     private PlayerTools playerTools;
     private GameObject spamPrefab;
 
-    [SerializeField] float abilityDelay;
+    [SerializeField] public float abilityDelay;
     public float timePassed = 0f;
 
     [SerializeField] float xSpawnOffset;
     [SerializeField] float spamMailSpeed;
     [SerializeField] float destroyTimer;
+
+    [SerializeField] public int damage;
 
     private void Start()
     {
@@ -45,6 +47,7 @@ public class SpamAbility : MonoBehaviour
     {
         GameObject objectSpamMail = Instantiate(spamPrefab, playerTools.GetSpamMailSpawnPosition(xSpawnOffset), Quaternion.Euler(-90, 0, 0));
         SpamMail spamMail = objectSpamMail.GetComponent<SpamMail>();
+        spamMail.baseDamage = damage;
         spamMail.direction = playerTools.GetSpamMailSpawnDirection();
         spamMail.speed = spamMailSpeed;
         spamMail.destroyTimer = destroyTimer;

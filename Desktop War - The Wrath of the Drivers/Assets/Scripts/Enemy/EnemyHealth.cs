@@ -18,6 +18,8 @@ public class EnemyHealth : MonoBehaviour
     {
         damageTextPrefab = Resources.Load<GameObject>("DamageText");
         canvas = transform.Find("EnemyCanvas").gameObject.GetComponent<Canvas>();
+        maxHealth = currentHealth;
+
     }
 
     private void Update()

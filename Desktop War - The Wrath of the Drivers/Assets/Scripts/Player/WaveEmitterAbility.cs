@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WaveEmitterAbility : MonoBehaviour
 {
-    [SerializeField] float abilityDelay = 1f;
+    [SerializeField] public float abilityDelay = 1f;
     public float timePassed = 0;
     public bool isAbilityActive = true;
     private PlayerTools playerTools;
@@ -11,6 +11,8 @@ public class WaveEmitterAbility : MonoBehaviour
     private GameObject wavePrefab;
     [SerializeField] float waveSpeed;
     [SerializeField] float destroyWaveTimer;
+
+    [SerializeField] public int damage;
 
     private void Start()
     {
@@ -42,6 +44,7 @@ public class WaveEmitterAbility : MonoBehaviour
     {
         GameObject objectWave = Instantiate(wavePrefab, transform.position + (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized * outerValue, Quaternion.identity);
         WaveEmitterWave waveEmitterWave = objectWave.GetComponent<WaveEmitterWave>();
+        waveEmitterWave.baseDamage = damage;
         waveEmitterWave.speed = waveSpeed;
         waveEmitterWave.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
         waveEmitterWave.destroyTimer = destroyWaveTimer;

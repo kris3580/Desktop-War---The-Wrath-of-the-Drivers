@@ -111,7 +111,7 @@ public class MenuButtons : MonoBehaviour
 
     public void Install()
     {
-        SceneManagement.LoadScene("GameplayTesting", 2f);
+        SceneManagement.LoadScene("Game", 2f);
     }
 
     private void Start()

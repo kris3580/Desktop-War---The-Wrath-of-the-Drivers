@@ -3,7 +3,7 @@ using UnityEngine;
 public class AutoclickerAbility : MonoBehaviour
 {
 
-    [SerializeField] float abilityDelay = 0.5f;
+    [SerializeField] public float abilityDelay = 0.5f;
     public float timePassed = 0;
     public bool isAbilityActive = true;
     private PlayerTools playerTools;
@@ -12,6 +12,7 @@ public class AutoclickerAbility : MonoBehaviour
     GameObject cursorPrefab;
     [SerializeField] float cursorSpeed;
     [SerializeField] float destroyCursorTimer;
+    [SerializeField] public int damage;
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class AutoclickerAbility : MonoBehaviour
     {
         GameObject objectCursor = Instantiate(cursorPrefab, transform.position + (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized * outerValue, Quaternion.Euler(-90,0,0));
         AutoclickerCursor autoclickerCursor = objectCursor.GetComponent<AutoclickerCursor>();
+        autoclickerCursor.baseDamage = damage;
         autoclickerCursor.speed = cursorSpeed;
         autoclickerCursor.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
         autoclickerCursor.destroyTimer = destroyCursorTimer;

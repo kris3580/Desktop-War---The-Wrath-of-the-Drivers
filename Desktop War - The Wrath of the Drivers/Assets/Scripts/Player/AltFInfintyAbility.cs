@@ -13,7 +13,7 @@ public class AltFInfintyAbility : MonoBehaviour
 
     private float previousSpeed;
 
-    [SerializeField] public float delayAbilityTimer;
+    [SerializeField] public float abilityDelay;
     public float currentAbilityTimer = 0f;
     private bool isAbilityCurrentlyInUse = false;
 
@@ -31,7 +31,7 @@ public class AltFInfintyAbility : MonoBehaviour
 
         if (currentAbilityTimer <= 0 && isAbilityActive && Input.GetMouseButtonDown(1) && !Pause.isPaused)
         {
-            currentAbilityTimer = delayAbilityTimer;
+            currentAbilityTimer = abilityDelay;
             movement.moveSpeed = changedSpeed;
             healthSystem.isSystemActive = false;
             isAbilityCurrentlyInUse = true;

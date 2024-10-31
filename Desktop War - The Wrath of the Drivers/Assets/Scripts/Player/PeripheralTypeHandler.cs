@@ -11,16 +11,16 @@ public class PeripheralTypeHandler : MonoBehaviour
     private Movement movement;
     private HealthSystem healthSystem;
 
-    private TeleportationAbility teleportationAbility;
-    private AutoclickerAbility autoclickerAbility;
-    private AltFInfintyAbility altFInfintyAbility;
-    private SpamAbility spamAbility;
-    private PFeedbackAbility pFeedbackAbility;
-    private WaveEmitterAbility waveEmitterAbility;
+    public TeleportationAbility teleportationAbility;
+    public AutoclickerAbility autoclickerAbility;
+    public AltFInfintyAbility altFInfintyAbility;
+    public SpamAbility spamAbility;
+    public PFeedbackAbility pFeedbackAbility;
+    public WaveEmitterAbility waveEmitterAbility;
 
-    [SerializeField] float mouseSpeed;
-    [SerializeField] float keyboardSpeed;
-    [SerializeField] float headphonesSpeed;
+    [SerializeField] public float mouseSpeed;
+    [SerializeField] public float keyboardSpeed;
+    [SerializeField] public float headphonesSpeed;
     [SerializeField] int mouseMaxHealth;
     [SerializeField] int keyboardMaxHealth;
     [SerializeField] int headphonesMaxHealth;
@@ -182,7 +182,7 @@ public class PeripheralTypeHandler : MonoBehaviour
         switch (currentPeripheral)
         {
             case PeripheralType.Mouse: return teleportationAbility.abilityDelay;
-            case PeripheralType.Keyboard: return altFInfintyAbility.delayAbilityTimer;
+            case PeripheralType.Keyboard: return altFInfintyAbility.abilityDelay;
             case PeripheralType.Headphones: return pFeedbackAbility.abilityDelay;
         }
         return 0;
@@ -212,8 +212,26 @@ public class PeripheralTypeHandler : MonoBehaviour
         return 0;
     }
 
+    public float GetAttackAbilityDamage()
+    {
+        switch (currentPeripheral)
+        {
+            case PeripheralType.Mouse: return autoclickerAbility.damage;
+            case PeripheralType.Keyboard: return spamAbility.damage;
+            case PeripheralType.Headphones: return waveEmitterAbility.damage;
+        }
+        return 0;
+    }
 
-
-
+    public float GetAttackAbilityDelay()
+    {
+        switch (currentPeripheral)
+        {
+            case PeripheralType.Mouse: return autoclickerAbility.abilityDelay;
+            case PeripheralType.Keyboard: return spamAbility.abilityDelay;
+            case PeripheralType.Headphones: return waveEmitterAbility.abilityDelay;
+        }
+        return 0;
+    }
 
 }

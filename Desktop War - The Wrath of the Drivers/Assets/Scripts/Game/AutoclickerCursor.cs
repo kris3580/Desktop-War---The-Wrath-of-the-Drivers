@@ -7,7 +7,7 @@ public class AutoclickerCursor : MonoBehaviour
     public float speed;
     public float destroyTimer;
 
-    [SerializeField] public int baseDamage;
+    public int baseDamage;
     public int extraDamage;
 
 
