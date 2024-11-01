@@ -21,6 +21,8 @@ public class EnemyInfoProvider : MonoBehaviour
         healthRedFill = enemyDataUI.transform.Find("HealthRedFill").GetComponent<Image>();
         healthBlackFill = enemyDataUI.transform.Find("HealthBlackFill").GetComponent<Image>();
         enemyInfoText = enemyDataUI.transform.Find("EnemyInfoText").GetComponent<TextMeshProUGUI>();
+
+        enemyDataUI.SetActive(false);
     }
 
     private void Update()

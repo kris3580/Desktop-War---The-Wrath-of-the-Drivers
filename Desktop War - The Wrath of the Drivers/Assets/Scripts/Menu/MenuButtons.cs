@@ -118,7 +118,15 @@ public class MenuButtons : MonoBehaviour
     {
         positionA = mainCamera.transform.position;
         rotationA = mainCamera.transform.rotation;
+
+        Invoke(nameof(OnLoadDeactivateInstallPanel), 0.001f);
     }
+
+    private void OnLoadDeactivateInstallPanel()
+    {
+        prepareInstallPanel.SetActive(false);
+    }
+
 
     private void Update()
     {

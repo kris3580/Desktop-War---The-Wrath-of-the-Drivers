@@ -24,6 +24,13 @@ public class MenuPeripheralsSelection : MonoBehaviour
     private static Image abilityImage1;
     private static Image abilityImage2;
 
+    [SerializeField] Sprite headphonesAttackImage;
+    [SerializeField] Sprite headphonesDefenceImage;
+    [SerializeField] Sprite keyboardAttackImage;
+    [SerializeField] Sprite keyboardDefenceImage;
+    [SerializeField] Sprite mouseAttackImage;
+    [SerializeField] Sprite mouseDefenceImage;
+
     private string headphonesDescription = "a masterpiece of human engineering";
     private string headphonesAbility1Name = "p_feedback";
     private string headphonesAbility2Name = "wave emitter";
@@ -62,6 +69,7 @@ public class MenuPeripheralsSelection : MonoBehaviour
         abilityImage2 = GameObject.Find("AbilityImage2").GetComponent<Image>();
         abilityDescription1Text = GameObject.Find("AbilityDescription1").GetComponent<TextMeshProUGUI>();
         abilityDescription2Text = GameObject.Find("AbilityDescription2").GetComponent<TextMeshProUGUI>();
+
     }
 
     void OnMouseOver()
@@ -153,6 +161,8 @@ public class MenuPeripheralsSelection : MonoBehaviour
                 abilityName2Text.text = headphonesAbility2Name;
                 abilityDescription1Text.text = headphonesAbilityDescription1;
                 abilityDescription2Text.text = headphonesAbilityDescription2;
+                abilityImage1.sprite = headphonesAttackImage;
+                abilityImage2.sprite = headphonesDefenceImage;
                 break;
 
             case "Keyboard":
@@ -163,6 +173,8 @@ public class MenuPeripheralsSelection : MonoBehaviour
                 abilityName2Text.text = keyboardAbility2Name;
                 abilityDescription1Text.text = keyboardAbilityDescription1;
                 abilityDescription2Text.text = keyboardAbilityDescription2;
+                abilityImage1.sprite = keyboardAttackImage;
+                abilityImage2.sprite = keyboardDefenceImage;
                 break;
 
             case "Mouse":
@@ -173,6 +185,8 @@ public class MenuPeripheralsSelection : MonoBehaviour
                 abilityName2Text.text = mouseAbility2Name;
                 abilityDescription1Text.text = mouseAbilityDescription1;
                 abilityDescription2Text.text = mouseAbilityDescription2;
+                abilityImage1.sprite = mouseAttackImage;
+                abilityImage2.sprite = mouseDefenceImage;
                 break;
         }
     }

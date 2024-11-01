@@ -39,7 +39,15 @@ public class PeripheralTypeHandler : MonoBehaviour
     [SerializeField] Color headphonesHealthBarColor;
     [SerializeField] Color headphonesSpecialDelayBarColor;
 
-    
+    private static Image abilityImage1;
+    private static Image abilityImage2;
+
+    [SerializeField] Sprite headphonesAttackImage;
+    [SerializeField] Sprite headphonesDefenceImage;
+    [SerializeField] Sprite keyboardAttackImage;
+    [SerializeField] Sprite keyboardDefenceImage;
+    [SerializeField] Sprite mouseAttackImage;
+    [SerializeField] Sprite mouseDefenceImage;
 
     private void Update()
     {
@@ -79,6 +87,8 @@ public class PeripheralTypeHandler : MonoBehaviour
         pFeedbackAbility = GetComponent<PFeedbackAbility>();
         waveEmitterAbility = GetComponent<WaveEmitterAbility>();
 
+        abilityImage1 = GameObject.Find("AttackIcon").GetComponent<Image>();
+        abilityImage2 = GameObject.Find("DefenseIcon").GetComponent<Image>();
         PeripheralSwitchHandler();
     }
 
@@ -121,6 +131,10 @@ public class PeripheralTypeHandler : MonoBehaviour
                     teleportationLineRenderer.SetActive(true);
                     healthBarImage.color = mouseHealthBarColor;
                     specialDelayBarImage.color = mouseSpecialDelayBarColor;
+                    abilityImage1.sprite = mouseAttackImage;
+                    abilityImage2.sprite = mouseDefenceImage;
+
+
                     break;
 
                 case PeripheralType.Keyboard:
@@ -135,6 +149,10 @@ public class PeripheralTypeHandler : MonoBehaviour
                     teleportationLineRenderer.SetActive(false);
                     healthBarImage.color = keyboardHealthBarColor;
                     specialDelayBarImage.color = keyboardSpecialDelayBarColor;
+                    abilityImage1.sprite = keyboardAttackImage;
+                    abilityImage2.sprite = keyboardDefenceImage;
+
+
                     break;
 
                 case PeripheralType.Headphones:
@@ -149,6 +167,10 @@ public class PeripheralTypeHandler : MonoBehaviour
                     teleportationLineRenderer.SetActive(false);
                     healthBarImage.color = headphonesHealthBarColor;
                     specialDelayBarImage.color = headphonesSpecialDelayBarColor;
+                    abilityImage1.sprite = headphonesAttackImage;
+                    abilityImage2.sprite = headphonesDefenceImage;
+
+
                     break;
             }
 

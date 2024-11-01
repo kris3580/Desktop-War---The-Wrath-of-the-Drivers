@@ -57,6 +57,9 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     [SerializeField] float upgradedKeyboardAttackDelay;
     [SerializeField] float upgradedHeadphonesAttackDelay;
 
+    [SerializeField] Image attackDelayUpgradeBoughtStatusImage;
+    [SerializeField] Image attackDamageUpgradeBoughtStatusImage;
+    [SerializeField] Image defenseUpgradeBoughtStatusImage;
 
     private void Update()
     {
@@ -211,8 +214,9 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
         peripheralTypeHandler.teleportationAbility.abilityDelay = upgradedMouseDefenceTime;
         peripheralTypeHandler.altFInfintyAbility.abilityDelay = upgradedKeyboardDefenceTime;
-        peripheralTypeHandler.pFeedbackAbility.abilityDelay = upgradedHeadphonesDefenceTime; 
+        peripheralTypeHandler.pFeedbackAbility.abilityDelay = upgradedHeadphonesDefenceTime;
 
+        defenseUpgradeBoughtStatusImage.color = new Color(0, 255, 0, 134);
         isUpgradedShieldDelayBought = true;
         BitflipHandler(-storePrices[4]);
         UpdateItemsAvailability();
@@ -226,6 +230,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         peripheralTypeHandler.spamAbility.damage += extraKeyboardAttackDamage;
         peripheralTypeHandler.waveEmitterAbility.damage += extraHeadphonesAttackDamage;
 
+        attackDamageUpgradeBoughtStatusImage.color = new Color(0, 255, 0, 134);
         isUpgradedAttackDamageBought = true;
         BitflipHandler(-storePrices[5]);
         UpdateItemsAvailability();
@@ -239,6 +244,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         peripheralTypeHandler.spamAbility.abilityDelay = upgradedKeyboardAttackDelay;
         peripheralTypeHandler.waveEmitterAbility.abilityDelay = upgradedHeadphonesAttackDelay;
 
+        attackDelayUpgradeBoughtStatusImage.color = new Color(0, 255, 0, 134);
         isUpgradedAttackDelayBought = true;
         BitflipHandler(-storePrices[6]);
         UpdateItemsAvailability();
