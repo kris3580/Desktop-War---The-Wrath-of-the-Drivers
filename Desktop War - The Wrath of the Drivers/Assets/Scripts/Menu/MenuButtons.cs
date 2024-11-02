@@ -130,6 +130,11 @@ public class MenuButtons : MonoBehaviour
 
     private void Update()
     {
+        CameraAnimationHandler();
+    }
+
+    private void CameraAnimationHandler()
+    {
         if (hasCameraAnimationStarted)
         {
             timer += Time.deltaTime * speed;
@@ -145,5 +150,4 @@ public class MenuButtons : MonoBehaviour
             }
         }
     }
-
 }

@@ -61,11 +61,74 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     [SerializeField] Image attackDamageUpgradeBoughtStatusImage;
     [SerializeField] Image defenseUpgradeBoughtStatusImage;
 
+
+    [Header("Camera Animation")]
+    [SerializeField] GameObject mainCamera;
+    private bool hasCameraAnimationStarted = false;
+    private float timer = 0f;
+    [SerializeField] float speed = 0.5f;
+
+    private Vector3 positionA;
+    private Quaternion rotationA;
+    [SerializeField] Vector3 positionB;
+    [SerializeField] Quaternion rotationB;
+
+    private Vector3 currentPosition, targetPosition;
+    private Quaternion currentRotation, targetRotation;
+
+    private bool cameraAnimationIsInStore = true;
+
+    private void StartCameraAnimation()
+    {
+        timer = 0f;
+        hasCameraAnimationStarted = true;
+
+        if (cameraAnimationIsInStore)
+        {
+            currentPosition = positionA;
+            currentRotation = rotationA;
+            targetPosition = positionB;
+            targetRotation = rotationB;
+        }
+        else
+        {
+            currentPosition = positionB;
+            currentRotation = rotationB;
+            targetPosition = positionA;
+            targetRotation = rotationA;
+        }
+
+        cameraAnimationIsInStore = !cameraAnimationIsInStore;
+    }
+
+
+    private void CameraAnimationHandler()
+    {
+        if (hasCameraAnimationStarted)
+        {
+            timer += Time.deltaTime * speed;
+
+            float clampedTimer = Mathf.Clamp01(timer);
+
+            mainCamera.transform.position = Vector3.Lerp(currentPosition, targetPosition, clampedTimer);
+            mainCamera.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, clampedTimer);
+
+            if (timer >= 1)
+            {
+                hasCameraAnimationStarted = false;
+            }
+        }
+    }
+
+
+
+
     private void Update()
     {
         DesktopIconDeselectionHandler();
         DoubleClickHandler();
         KeepWindowOnScreen();
+        CameraAnimationHandler();
     }
 
     private void Start()
@@ -74,6 +137,9 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         healthSystem = FindObjectOfType<HealthSystem>();
         memory = FindObjectOfType<Memory>();
         movement = FindObjectOfType<Movement>();
+
+        positionA = mainCamera.transform.position;
+        rotationA = mainCamera.transform.rotation;
 
         BitflipHandler(0);
         SetupPrices();
@@ -271,6 +337,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         storeWindow.SetActive(false);
         desktopIcon.SetActive(true);
         isInStore = false;
+        StartCameraAnimation();
     }
     private void ShowStore()
     {
@@ -283,6 +350,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
         UpdateItemsAvailability();
         BitflipHandler(0);
+        StartCameraAnimation();
     }
 
     private void DoubleClickHandler()

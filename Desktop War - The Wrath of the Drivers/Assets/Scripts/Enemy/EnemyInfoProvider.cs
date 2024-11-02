@@ -8,21 +8,26 @@ public class EnemyInfoProvider : MonoBehaviour
 {
     private static EnemyHealth enemyHealth;
 
-    private Image healthRedFill;
-    private Image healthBlackFill;
-    private TextMeshProUGUI enemyInfoText;
+    private static Image healthRedFill;
+    private static Image healthBlackFill;
+    private static TextMeshProUGUI enemyInfoText;
 
-    private GameObject enemyDataUI;
+    private static GameObject enemyDataUI;
 
+    [SerializeField] bool isInitial;
 
     private void Start()
     {
-        enemyDataUI = GameObject.Find("EnemyDataUI");
-        healthRedFill = enemyDataUI.transform.Find("HealthRedFill").GetComponent<Image>();
-        healthBlackFill = enemyDataUI.transform.Find("HealthBlackFill").GetComponent<Image>();
-        enemyInfoText = enemyDataUI.transform.Find("EnemyInfoText").GetComponent<TextMeshProUGUI>();
+        if (isInitial)
+        {
+            enemyDataUI = GameObject.Find("EnemyDataUI");
+            healthRedFill = enemyDataUI.transform.Find("HealthRedFill").GetComponent<Image>();
+            healthBlackFill = enemyDataUI.transform.Find("HealthBlackFill").GetComponent<Image>();
+            enemyInfoText = enemyDataUI.transform.Find("EnemyInfoText").GetComponent<TextMeshProUGUI>();
 
-        enemyDataUI.SetActive(false);
+            enemyDataUI.SetActive(false);
+        }
+
     }
 
     private void Update()
@@ -43,6 +48,8 @@ public class EnemyInfoProvider : MonoBehaviour
         }
         else
         {
+            
+            
             enemyDataUI.SetActive(false);
         }
     }
