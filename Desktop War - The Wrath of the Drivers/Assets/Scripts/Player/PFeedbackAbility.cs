@@ -30,6 +30,7 @@ public class PFeedbackAbility : MonoBehaviour
         {
             isShiledCurrentlyInUse = true;
             timePassed = abilityDelay;
+            PlayerAnimations.isDefending = true;
         }
 
         if (isShiledCurrentlyInUse)

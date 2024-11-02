@@ -48,6 +48,8 @@ public class HealthSystem : MonoBehaviour
         {
             currentHealth--;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
+
+            PlayerAnimations.isGettingHit = true;
             UpdateInstability(true);
             Destroy(bulletToRemove);
         }

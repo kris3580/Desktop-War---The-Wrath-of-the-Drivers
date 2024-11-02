@@ -35,6 +35,8 @@ public class TeleportationAbility : MonoBehaviour
 
             Vector3 newPosition = playerTools.GetCursorToWorldPlanePosition();
             
+            PlayerAnimations.isDefending = true;
+
             transform.position = newPosition;
         }
     }

@@ -35,6 +35,8 @@ public class AltFInfintyAbility : MonoBehaviour
             movement.moveSpeed = changedSpeed;
             healthSystem.isSystemActive = false;
             isAbilityCurrentlyInUse = true;
+            PlayerAnimations.isDefending = true;
+
         }
 
         if (isAbilityCurrentlyInUse)

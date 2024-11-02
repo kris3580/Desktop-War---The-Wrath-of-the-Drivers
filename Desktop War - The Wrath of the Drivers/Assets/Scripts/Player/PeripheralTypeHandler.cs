@@ -49,6 +49,10 @@ public class PeripheralTypeHandler : MonoBehaviour
     [SerializeField] Sprite mouseAttackImage;
     [SerializeField] Sprite mouseDefenceImage;
 
+    [SerializeField] GameObject headphonesModel;
+    [SerializeField] GameObject keyboardModel;
+    [SerializeField] GameObject mouseModel;
+
     private void Update()
     {
         InputPeripheralSwitch();
@@ -133,7 +137,7 @@ public class PeripheralTypeHandler : MonoBehaviour
                     specialDelayBarImage.color = mouseSpecialDelayBarColor;
                     abilityImage1.sprite = mouseAttackImage;
                     abilityImage2.sprite = mouseDefenceImage;
-
+                    headphonesModel.SetActive(false); keyboardModel.SetActive(false); mouseModel.SetActive(true); 
 
                     break;
 
@@ -151,7 +155,7 @@ public class PeripheralTypeHandler : MonoBehaviour
                     specialDelayBarImage.color = keyboardSpecialDelayBarColor;
                     abilityImage1.sprite = keyboardAttackImage;
                     abilityImage2.sprite = keyboardDefenceImage;
-
+                    headphonesModel.SetActive(false); keyboardModel.SetActive(true); mouseModel.SetActive(false);
 
                     break;
 
@@ -169,7 +173,7 @@ public class PeripheralTypeHandler : MonoBehaviour
                     specialDelayBarImage.color = headphonesSpecialDelayBarColor;
                     abilityImage1.sprite = headphonesAttackImage;
                     abilityImage2.sprite = headphonesDefenceImage;
-
+                    headphonesModel.SetActive(true); keyboardModel.SetActive(false); mouseModel.SetActive(false);
 
                     break;
             }
