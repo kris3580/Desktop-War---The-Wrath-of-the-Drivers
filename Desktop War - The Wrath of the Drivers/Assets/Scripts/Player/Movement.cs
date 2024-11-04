@@ -5,7 +5,7 @@ public class Movement : MonoBehaviour
 {
 
     public float moveSpeed = 5f;
-    public bool isFrozen = false;
+    public static bool isFrozen = false;
 
     [SerializeField] Vector2 xClamp;
     [SerializeField] Vector2 yClamp;

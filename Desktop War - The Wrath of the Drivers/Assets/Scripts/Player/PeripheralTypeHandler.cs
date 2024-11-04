@@ -8,7 +8,7 @@ public class PeripheralTypeHandler : MonoBehaviour
     public static PeripheralType? selectedPeripheral;
     [SerializeField] PeripheralType? currentPeripheral;
 
-    private Movement movement;
+    public Movement movement;
     private HealthSystem healthSystem;
 
     public TeleportationAbility teleportationAbility;

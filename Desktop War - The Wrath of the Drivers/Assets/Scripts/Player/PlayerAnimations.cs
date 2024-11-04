@@ -30,7 +30,6 @@ public class PlayerAnimations : MonoBehaviour
     }
 
 
-
     private void HitHandler()
     {
         if (isGettingHit)
@@ -128,6 +127,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         if (!isDefending) return;
 
+
         currentDefenseRotationTime += Time.deltaTime;
         
         float angle = Mathf.Lerp(0, 360, currentDefenseRotationTime / defensiveRotationDuration);
@@ -147,6 +147,8 @@ public class PlayerAnimations : MonoBehaviour
 
     private void LeanHandler()
     {
+        if (Movement.isFrozen) return;
+
         rotation = playerModelsObject.transform.localEulerAngles;
 
         if (Input.GetKey(KeyCode.D))

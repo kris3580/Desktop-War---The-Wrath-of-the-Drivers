@@ -9,6 +9,7 @@ public class TeleportationAbility : MonoBehaviour
     private PlayerTools playerTools;
     [SerializeField] public LineRenderer lineRenderer;
 
+
     private void Start()
     {
         lineRenderer.transform.gameObject.SetActive(true);
@@ -43,7 +44,7 @@ public class TeleportationAbility : MonoBehaviour
     private void TeleportationLineHandler()
     {
 
-        if (Pause.isPaused || Store.isInStore)
+        if (Pause.isPaused || Store.isInStore || Movement.isFrozen)
         {
             lineRenderer.enabled = false;
             return;

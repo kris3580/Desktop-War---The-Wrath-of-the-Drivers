@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +10,9 @@ public class Cursor : MonoBehaviour
 
     private float timeUntilDelayToDefaultCursorMethodCouldBeUsed = 7f;
     private float currentTime = 8f;
+
+    public static Cursor instance { get; private set; }
+
     private void Update()
     {
         currentTime += Time.deltaTime;
@@ -23,9 +25,15 @@ public class Cursor : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // event
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (instance == null) return;
+
         string activeSceneName = SceneManager.GetActiveScene().name;
 
         if (activeSceneName == "Loading")
@@ -42,23 +50,27 @@ public class Cursor : MonoBehaviour
         }
     }
 
-
     public IEnumerator DelayedReturnToDefaultCursor()
     {
+        if (instance == null) yield break;
+
         if (currentTime > timeUntilDelayToDefaultCursorMethodCouldBeUsed)
         {
             currentTime = 0;
             SetCursor("loadingCursor");
             yield return new WaitForSeconds(UnityEngine.Random.Range(0.01f, 1.2f));
-            SetCursor("defaultCursor");
+
+            if (instance != null)
+            {
+                SetCursor("defaultCursor");
+            }
         }
-
-        
     }
-
 
     public void SetCursor(string textureName)
     {
+        if (instance == null) return;
+
         switch (textureName)
         {
             case "defaultCursor":
@@ -72,9 +84,6 @@ public class Cursor : MonoBehaviour
         }
     }
 
-
-    // singleton
-    public static Cursor instance { get; private set; }
     private void SingletonHandler()
     {
         if (instance == null)
