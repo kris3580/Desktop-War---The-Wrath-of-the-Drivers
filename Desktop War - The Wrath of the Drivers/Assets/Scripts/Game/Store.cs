@@ -324,8 +324,8 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         RectTransform rect = storeWindow.GetComponent<RectTransform>();
 
         rect.localPosition = new Vector3( 
-            Mathf.Clamp(rect.localPosition.x ,-6.8f, 4.82f), 
-            Mathf.Clamp(rect.localPosition.y, -2.41f, 3.06f), 
+            Mathf.Clamp(rect.localPosition.x, -6.936803f, 4.98007f), 
+            Mathf.Clamp(rect.localPosition.y, -2.89427f, 1.44182f), 
             rect.localPosition.z);
     }
 
