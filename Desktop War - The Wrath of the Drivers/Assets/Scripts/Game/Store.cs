@@ -228,7 +228,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         if (!isItemAvailableToBuy[0]) return;
 
         healthSystem.currentHealth = healthSystem.maxHealth = healthSystem.currentMaxHealth;
-
+        SFXHandler.Instance.Play(2);
         BitflipHandler(-storePrices[0]);
         UpdateItemsAvailability();
 
@@ -239,7 +239,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         if (!isItemAvailableToBuy[1]) return;
 
         memory.LevelHandler(1);
-
+        SFXHandler.Instance.Play(2);
         BitflipHandler(-storePrices[1]);
         UpdateItemsAvailability();
     }
@@ -251,7 +251,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         healthSystem.currentMaxHealth++;
         healthSystem.maxHealth++;
         healthSystem.currentHealth++;
-
+        SFXHandler.Instance.Play(2);
         BitflipHandler(-storePrices[2]);
         UpdateItemsAvailability();
     }
@@ -265,7 +265,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         peripheralTypeHandler.mouseSpeed += upgradedMoveSpeed;
         peripheralTypeHandler.keyboardSpeed += upgradedMoveSpeed;
         peripheralTypeHandler.headphonesSpeed += upgradedMoveSpeed;
-
+        SFXHandler.Instance.Play(2);
 
 
         extraSpeedSymbol.SetActive(true);
@@ -281,7 +281,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         peripheralTypeHandler.teleportationAbility.abilityDelay = upgradedMouseDefenceTime;
         peripheralTypeHandler.altFInfintyAbility.abilityDelay = upgradedKeyboardDefenceTime;
         peripheralTypeHandler.pFeedbackAbility.abilityDelay = upgradedHeadphonesDefenceTime;
-
+        SFXHandler.Instance.Play(2);
         defenseUpgradeBoughtStatusImage.color = new Color(0, 255, 0, 134);
         isUpgradedShieldDelayBought = true;
         BitflipHandler(-storePrices[4]);
@@ -295,7 +295,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         peripheralTypeHandler.autoclickerAbility.damage += extraMouseAttackDamage;
         peripheralTypeHandler.spamAbility.damage += extraKeyboardAttackDamage;
         peripheralTypeHandler.waveEmitterAbility.damage += extraHeadphonesAttackDamage;
-
+        SFXHandler.Instance.Play(2);
         attackDamageUpgradeBoughtStatusImage.color = new Color(0, 255, 0, 134);
         isUpgradedAttackDamageBought = true;
         BitflipHandler(-storePrices[5]);
@@ -309,7 +309,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         peripheralTypeHandler.autoclickerAbility.abilityDelay = upgradedMouseAttackDelay;
         peripheralTypeHandler.spamAbility.abilityDelay = upgradedKeyboardAttackDelay;
         peripheralTypeHandler.waveEmitterAbility.abilityDelay = upgradedHeadphonesAttackDelay;
-
+        SFXHandler.Instance.Play(2);
         attackDelayUpgradeBoughtStatusImage.color = new Color(0, 255, 0, 134);
         isUpgradedAttackDelayBought = true;
         BitflipHandler(-storePrices[6]);
@@ -337,6 +337,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         storeWindow.SetActive(false);
         desktopIcon.SetActive(true);
         isInStore = false;
+        SFXHandler.Instance.Play(1);
         StartCameraAnimation();
     }
     private void ShowStore()
@@ -347,6 +348,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         desktopIcon.SetActive(false);
         iconHighlightBorder.SetActive(false);
         isInStore = true;
+        SFXHandler.Instance.Play(21);
         StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
         UpdateItemsAvailability();
         BitflipHandler(0);

@@ -48,6 +48,7 @@ public class WaveEmitterAbility : MonoBehaviour
         waveEmitterWave.speed = waveSpeed;
         waveEmitterWave.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
         waveEmitterWave.destroyTimer = destroyWaveTimer;
+        SFXHandler.Instance.Play(17);
     }
 
 }

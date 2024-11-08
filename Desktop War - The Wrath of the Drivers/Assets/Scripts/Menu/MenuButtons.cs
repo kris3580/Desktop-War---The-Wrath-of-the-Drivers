@@ -14,13 +14,15 @@ public class MenuButtons : MonoBehaviour
     //MAIN MENU
     public void ExitGame()
     {
+        SFXHandler.Instance.Play(1);
         SceneManagement.LoadScene("EXIT GAME!", 1f);
     }
 
     public void OpenSettings()
     {
-        StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
 
+        StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
+        SFXHandler.Instance.Play(1);
         mainMenuPanel.SetActive(false);
 
         if(Screen.fullScreen == true) SettingsManager.isFullscreenOn = 1;
@@ -30,6 +32,7 @@ public class MenuButtons : MonoBehaviour
     }
     public void CloseSettings()
     {
+        SFXHandler.Instance.Play(1);
         mainMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
     }
@@ -37,13 +40,14 @@ public class MenuButtons : MonoBehaviour
     public void OpenCredits()
     {
         StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
-
+        SFXHandler.Instance.Play(1);
         mainMenuPanel.SetActive(false);
         creditsPanel.SetActive(true);
     }
 
     public void CloseCredits()
     {
+        SFXHandler.Instance.Play(1);
         mainMenuPanel.SetActive(true);
         creditsPanel.SetActive(false);
     }
@@ -52,6 +56,8 @@ public class MenuButtons : MonoBehaviour
     {
         StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
 
+        SFXHandler.Instance.Play(1);
+        SFXHandler.Instance.Play(22);
         logoPanel.SetActive(false);
         menuTagsTextDecoration.SetActive(false);
         mainMenuPanel.SetActive(false);
@@ -62,6 +68,8 @@ public class MenuButtons : MonoBehaviour
 
     public void ClosePrepareGame()
     {
+        SFXHandler.Instance.Play(1);
+        SFXHandler.Instance.Play(22);
         logoPanel.SetActive(true);
         menuTagsTextDecoration.SetActive(true);
         mainMenuPanel.SetActive(true);
@@ -111,7 +119,8 @@ public class MenuButtons : MonoBehaviour
 
     public void Install()
     {
-        SceneManagement.LoadScene("Game", 2f);
+        SFXHandler.Instance.Play(0);
+        SceneManagement.LoadScene("Game", 6.2f);
     }
 
     private void Start()

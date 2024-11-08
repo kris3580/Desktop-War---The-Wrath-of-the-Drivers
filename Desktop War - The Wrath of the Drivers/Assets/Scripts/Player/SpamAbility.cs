@@ -51,6 +51,7 @@ public class SpamAbility : MonoBehaviour
         spamMail.direction = playerTools.GetSpamMailSpawnDirection();
         spamMail.speed = spamMailSpeed;
         spamMail.destroyTimer = destroyTimer;
+        SFXHandler.Instance.Play(20, 0.3f);
     }
 
     

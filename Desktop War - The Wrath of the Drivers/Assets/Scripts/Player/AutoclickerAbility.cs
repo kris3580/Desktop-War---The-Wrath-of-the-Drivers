@@ -47,5 +47,6 @@ public class AutoclickerAbility : MonoBehaviour
         autoclickerCursor.speed = cursorSpeed;
         autoclickerCursor.moveDirection = (playerTools.GetCursorToWorldPlanePosition() - transform.position).normalized;
         autoclickerCursor.destroyTimer = destroyCursorTimer;
+        SFXHandler.Instance.Play(19, 0.6f);
     }
 }

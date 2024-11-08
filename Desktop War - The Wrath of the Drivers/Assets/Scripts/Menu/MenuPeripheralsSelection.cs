@@ -84,6 +84,7 @@ public class MenuPeripheralsSelection : MonoBehaviour
 
     private void OnMouseUp()
     {
+        SFXHandler.Instance.Play(4);
         ClickedPeripheralHandler();
     }
 

@@ -58,7 +58,7 @@ public class EnemyHealth : MonoBehaviour
         {
             currentHealth -= healthToRemove;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
-
+            SFXHandler.Instance.Play(6);
             SpawnDamageText(healthToRemove);
             DamagePerSecond.AddToDPSCounter(healthToRemove);
 
@@ -66,7 +66,9 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            // on death
+            SFXHandler.Instance.Play(18);
+            Destroy(gameObject);
+            
         }
     }
 

@@ -48,7 +48,7 @@ public class HealthSystem : MonoBehaviour
         {
             currentHealth--;
             currentDelayHealthRemovalTimer = delayHealthRemovalTimer;
-
+            if (currentHealth > 0) SFXHandler.Instance.Play(16, 0.5f);
             PlayerAnimations.isGettingHit = true;
             UpdateInstability(true);
             Destroy(bulletToRemove);
@@ -56,6 +56,7 @@ public class HealthSystem : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            SFXHandler.Instance.Play(7);
             SceneManager.LoadScene("GameOver");
         }
     }
