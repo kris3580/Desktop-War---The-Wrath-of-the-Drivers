@@ -36,6 +36,7 @@ public class AltFInfintyAbility : MonoBehaviour
             healthSystem.isSystemActive = false;
             isAbilityCurrentlyInUse = true;
             PlayerAnimations.isDefending = true;
+            SFXHandler.Instance.Play(24);
 
         }
 

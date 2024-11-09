@@ -31,6 +31,7 @@ public class PFeedbackAbility : MonoBehaviour
             isShiledCurrentlyInUse = true;
             timePassed = abilityDelay;
             PlayerAnimations.isDefending = true;
+            SFXHandler.Instance.Play(24);
         }
 
         if (isShiledCurrentlyInUse)

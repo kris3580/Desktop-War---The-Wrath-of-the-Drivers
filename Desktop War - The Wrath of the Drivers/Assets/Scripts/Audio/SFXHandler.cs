@@ -6,12 +6,16 @@ public class SFXHandler : MonoBehaviour
     [SerializeField] GameObject sfxPrefab;
     [SerializeField] AudioClip[] audioClips;
 
+    private float minVolume = 0.1f;
+
+
     public void Play(int sfxIndex, float volumeNormalizationOffset = 0)
     {
         GameObject sfxInstance = Instantiate(sfxPrefab);
         sfxInstance.GetComponent<AudioSource>().clip = audioClips[sfxIndex];
         sfxInstance.GetComponent<SFX>().timeToWaitUntilDestroy = audioClips[sfxIndex].length;
-        sfxInstance.GetComponent<AudioSource>().volume = SettingsManager.volume - volumeNormalizationOffset;
+
+        sfxInstance.GetComponent<AudioSource>().volume = Mathf.Max(SettingsManager.volume - volumeNormalizationOffset, minVolume);
         sfxInstance.GetComponent<AudioSource>().Play();
     }
 
