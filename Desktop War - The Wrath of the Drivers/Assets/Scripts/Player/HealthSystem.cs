@@ -39,10 +39,15 @@ public class HealthSystem : MonoBehaviour
         {
             RemoveHealth(other.gameObject);
         }
+
+        if (other.tag == "EnemyTouch")
+        {
+            RemoveHealth();
+        }
     }
 
 
-    private void RemoveHealth(GameObject bulletToRemove)
+    private void RemoveHealth(GameObject bulletToRemove = null)
     {
         if (currentDelayHealthRemovalTimer <= 0 && isSystemActive)
         {

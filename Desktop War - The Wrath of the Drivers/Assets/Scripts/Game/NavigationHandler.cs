@@ -1,17 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NavigationHandler : MonoBehaviour
 {
     private bool[] enterExitBools = { false, false };
 
-    private int xNav = 1;
-    private int yNav = 4;
+    public int xNav = 1;
+    public int yNav = 4;
     private GameObject[,] map;
 
     [SerializeField] GameObject[] Z;
 
+    GameManagement gameManagement;
+    DialogueSystem dialogueSystem;
+
+    [SerializeField] public Texture permittedHighlight;
+    [SerializeField] public Texture forbiddenHighlight;
 
 
     private void Update()
@@ -30,28 +34,96 @@ public class NavigationHandler : MonoBehaviour
             { null,   Z[0],   Z[1],   Z[2],   null,   null,  }
         };
 
+        gameManagement = FindObjectOfType<GameManagement>();
+        dialogueSystem = FindObjectOfType<DialogueSystem>();
+
     }
+
+    private void ResetEnterExitBools()
+    {
+        enterExitBools[0] = false;
+        enterExitBools[1] = false;
+    }
+
+    public void DelayedResetEnterExitBools()
+    {
+        Invoke(nameof(ResetEnterExitBools), 1f);
+    }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
-        // exceptions
+        if (dialogueSystem.isInDialogue) return;
+
+        // doors that are locked forever
 
         if (other.name == "NAV_RIGHT" && xNav == 3 && yNav == 4)
         {
+            other.transform.parent.GetComponent<RawImage>().texture = forbiddenHighlight;
+            if (gameManagement.isClippyWithYou)
+            {
+                StartCoroutine(gameManagement.S_WhenInteractingWithLockedDoorOneClippy());
+            }
+            else
+            {
+                StartCoroutine(gameManagement.S_WhenInteractingWithBIOSDoorAlone());
+            }
             return;
         }
         else if (other.name == "NAV_RIGHT" && xNav == 5 && yNav == 3)
         {
+            other.transform.parent.GetComponent<RawImage>().texture = forbiddenHighlight;
+
+            StartCoroutine(gameManagement.S_WhenInteractingWithDoorTwo());
+
             return;
         }
         else if (other.name == "NAV_LEFT" && xNav == 2 && yNav == 0)
         {
+            other.transform.parent.GetComponent<RawImage>().texture = forbiddenHighlight;
+
+            StartCoroutine(gameManagement.S_WhenInteractingWithDoorThree());
+
+            return;
+        }
+
+        // doors that will unlock eventually
+        if (other.name == "NAV_RIGHT" && xNav == 3 && yNav == 3 && !gameManagement.hasBeatenNetworkCard)
+        {
+            other.transform.parent.GetComponent<RawImage>().texture = forbiddenHighlight;
+
+            StartCoroutine(gameManagement.S_WhenInteractingWithLockedDefault());
+
+            return;
+        }
+
+
+        if (other.name == "NAV_LEFT" && xNav == 3 && yNav == 2 && !gameManagement.hasBeatenNetworkCard)
+        {
+            other.transform.parent.GetComponent<RawImage>().texture = forbiddenHighlight;
+
+            StartCoroutine(gameManagement.S_WhenInteractingWithLockedDefault());
+
+            return;
+        }
+
+
+        if (other.name == "NAV_LEFT" && xNav == 3 && yNav == 1 && !gameManagement.hasBeatenNetworkCard)
+        {
+            other.transform.parent.GetComponent<RawImage>().texture = forbiddenHighlight;
+
+            StartCoroutine(gameManagement.S_WhenInteractingWithLockedDefault());
+
             return;
         }
 
 
 
 
+
+
+        // usual cases
         if (!enterExitBools[0] && !enterExitBools[1] && (other.name == "NAV_UP" || other.name == "NAV_DOWN" || other.name == "NAV_LEFT" || other.name == "NAV_RIGHT"))
         {
             map[yNav, xNav].SetActive(false);

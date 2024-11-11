@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SFXHandler : MonoBehaviour
@@ -50,6 +51,16 @@ public class SFXHandler : MonoBehaviour
         }
 
     }
+
+    public IEnumerator CallingSFX(float timeToWait)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            yield return new WaitForSeconds(timeToWait);
+            Play(3);
+        }
+    }
+
 
 
 

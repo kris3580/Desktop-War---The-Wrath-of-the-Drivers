@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class DialogueSystem : MonoBehaviour
@@ -18,7 +15,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] PeripheralTypeHandler peripheralTypeHandler;
 
     private bool toSkipTyping = false;
-    private bool isInDialogue = false;
+    public bool isInDialogue = false;
     private void Update()
     {
 
@@ -32,11 +29,11 @@ public class DialogueSystem : MonoBehaviour
 
     private void TypeText(string speaker, string dialogue)
     {
-        StartCoroutine(TTC(speaker, dialogue));
+        StartCoroutine(TypeTextRoutine(speaker, dialogue));
     }
 
 
-    public IEnumerator TTC(string speaker, string dialogue)
+    public IEnumerator TypeTextRoutine(string speaker, string dialogue)
     {
         if (isInDialogue) yield break;
 

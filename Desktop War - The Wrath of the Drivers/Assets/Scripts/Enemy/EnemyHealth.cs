@@ -45,9 +45,6 @@ public class EnemyHealth : MonoBehaviour
             {
                 RemoveHealth(other.GetComponent<WaveEmitterWave>().GetDamage(), false);
             }
-
-
-
         }
     }
     
