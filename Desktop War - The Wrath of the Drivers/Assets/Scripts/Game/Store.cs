@@ -42,6 +42,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private HealthSystem healthSystem;
     private Memory memory;
     private Movement movement;
+    private DialogueSystem dialogueSystem;
 
     [SerializeField] float upgradedMoveSpeed;
 
@@ -61,6 +62,8 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     [SerializeField] Image attackDamageUpgradeBoughtStatusImage;
     [SerializeField] Image defenseUpgradeBoughtStatusImage;
 
+
+    [SerializeField] GameObject zone5Navs;
 
     [Header("Camera Animation")]
     [SerializeField] GameObject mainCamera;
@@ -137,6 +140,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         healthSystem = FindObjectOfType<HealthSystem>();
         memory = FindObjectOfType<Memory>();
         movement = FindObjectOfType<Movement>();
+        dialogueSystem = FindObjectOfType<DialogueSystem>();
 
         positionA = mainCamera.transform.position;
         rotationA = mainCamera.transform.rotation;
@@ -338,17 +342,20 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         desktopIcon.SetActive(true);
         isInStore = false;
         SFXHandler.Instance.Play(1);
+        zone5Navs.SetActive(true);
         StartCameraAnimation();
     }
     private void ShowStore()
     {
         if (Pause.isPaused) return;
+        if (dialogueSystem.isInDialogue) return;
 
         storeWindow.SetActive(true);
         desktopIcon.SetActive(false);
         iconHighlightBorder.SetActive(false);
         isInStore = true;
         SFXHandler.Instance.Play(21);
+        zone5Navs.SetActive(false);
         StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
         UpdateItemsAvailability();
         BitflipHandler(0);

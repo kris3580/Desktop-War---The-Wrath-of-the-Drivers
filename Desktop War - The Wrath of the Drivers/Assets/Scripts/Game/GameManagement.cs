@@ -12,20 +12,20 @@ public class GameManagement : MonoBehaviour
     public bool hasGameStartAnimationFinished = false;
     public bool hasGameStarted = false;
 
-    public bool hasShootingTutorialBeenTriggered = false;
-    public bool hasShootingTutorialStarted = false;
-
     public bool hasDefendingTutorialBeenTriggered = false;
     public bool hasDefendingTutorialStarted = false;
 
-    public bool hasPassedTutorialsBeenTriggered = false;
-    public bool hasPassedTutorialsStarted = false;
+    public bool hasShootingTutorialBeenTriggered = false;
+    public bool hasShootingTutorialStarted = false;
+
+    public bool hasPassedTutorialBeenTriggered = false;
+    public bool hasPassedTutorialStarted = false;
 
     public bool isClippyWithYou = false;
     public bool hasMetClippyForTheFirstTime = false;
 
-    public bool hasFinishedARoomWithClippyTriggered = false;
-    public bool hasFinishedARoomWithClippyStarted = false;
+    public bool hasLeftTheRoomWithClippyTriggered = false;
+    public bool hasLeftTheRoomWithClippyStarted = false;
 
     public bool hasArrivedAtStorageTriggered = false;
     public bool hasArrivedAtStorageStarted = false;
@@ -57,27 +57,6 @@ public class GameManagement : MonoBehaviour
     public bool hasGameEndedTriggered = false;
     public bool hasGameEndedStarted = false;
 
-    [SerializeField] private List<GameObject> zones;
-
-    [SerializeField] private List<GameObject> zone2EnemyList;
-    [SerializeField] private List<GameObject> zone3EnemyList;
-    [SerializeField] private List<GameObject> zone4EnemyList;
-    [SerializeField] private List<GameObject> zone6EnemyList;
-    [SerializeField] private List<GameObject> zone7EnemyList;
-    [SerializeField] private List<GameObject> zone8EnemyList;
-    [SerializeField] private List<GameObject> zone9EnemyList;
-    [SerializeField] private List<GameObject> zone10EnemyList;
-    [SerializeField] private List<GameObject> zone11EnemyList;
-    [SerializeField] private List<GameObject> zone12EnemyList;
-    [SerializeField] private List<GameObject> zone13EnemyList;
-    [SerializeField] private List<GameObject> zone14EnemyList;
-    [SerializeField] private List<GameObject> zone15EnemyList;
-
-    [SerializeField] private RawImage biosDoorImage;
-    [SerializeField] private RawImage networkCardDirectDoor;
-    [SerializeField] private RawImage motherboard2DoorOne;
-    [SerializeField] private RawImage motherboard2DoorTwo;
-
     public bool isZone2Finished = false;
     public bool isZone3Finished = false;
     public bool isZone4Finished = false;
@@ -92,39 +71,84 @@ public class GameManagement : MonoBehaviour
     public bool isZone14Finished = false;
     public bool isZone15Finished = false;
 
+    [SerializeField] private RawImage biosDoorImage;
+    [SerializeField] private RawImage networkCardDirectDoor;
+    [SerializeField] private RawImage motherboard2DoorOne;
+    [SerializeField] private RawImage motherboard2DoorTwo;
+    [SerializeField] private GameObject blackPanel;
+    [SerializeField] private GameObject zone1RightNav;
+    [SerializeField] private GameObject clippyFirstInteractionTrigger;
+    [SerializeField] private GameObject zone4EnemyGroup;
+
+    [SerializeField] private List<GameObject> zones;
+
+    [SerializeField] private List<GameObject> zone2EnemyList;
+    [SerializeField] public List<GameObject> zone3EnemyList;
+    [SerializeField] private List<GameObject> zone4EnemyList;
+    [SerializeField] private List<GameObject> zone6EnemyList;
+    [SerializeField] private List<GameObject> zone7EnemyList;
+    [SerializeField] private List<GameObject> zone8EnemyList;
+    [SerializeField] private List<GameObject> zone9EnemyList;
+    [SerializeField] private List<GameObject> zone10EnemyList;
+    [SerializeField] private List<GameObject> zone11EnemyList;
+    [SerializeField] private List<GameObject> zone12EnemyList;
+    [SerializeField] private List<GameObject> zone13EnemyList;
+    [SerializeField] private List<GameObject> zone14EnemyList;
+    [SerializeField] private List<GameObject> zone15EnemyList;
+
+
     private void Start()
     {
         dialogueSystem = FindObjectOfType<DialogueSystem>();
         navigationHandler = FindObjectOfType<NavigationHandler>();
         sfxHandler = FindObjectOfType<SFXHandler>();
+
+        hasGameStartAnimationFinished = true;
     }
-
-
 
     private void Update()
     {
         BoolTriggeringHandler();
         EnemyListsHandler();
+        TriggerDialogue();
     }
 
+    // TRIGGER DIALOGUE WHEN ENTERING ROOM
+    private void TriggerDialogue()
+    {
+        if (navigationHandler.xNav == 2 && navigationHandler.yNav == 4)
+        {
+            hasDefendingTutorialBeenTriggered = true;
+        }
 
+        if (navigationHandler.xNav == 3 && navigationHandler.yNav == 4) 
+        { 
+            hasShootingTutorialBeenTriggered = true;
+        }
+
+        if (navigationHandler.xNav == 3 && navigationHandler.yNav == 2)
+        {
+            hasLeftTheRoomWithClippyTriggered = true;
+        }
+
+        if (navigationHandler.xNav == 3 && navigationHandler.yNav == 1)
+        {
+            hasArrivedAtStorageTriggered = true;
+        }
+
+    }
+
+    // ENEMY CHECKING
     private void EnemyListsHandler()
     {
-        
+
         // ZONE 2
         if (AreAllElementsNull(zone2EnemyList) && !isZone2Finished)
         {
             zones[0].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
             isZone2Finished = true;
             navigationHandler.DelayedResetEnterExitBools();
-        }
-
-        // ZONE 3
-        if (AreAllElementsNull(zone3EnemyList) && !isZone3Finished)
-        {
-            zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
-            isZone3Finished = true;
-            navigationHandler.DelayedResetEnterExitBools();
+            hasPassedTutorialBeenTriggered = true;
         }
 
         // ZONE 4
@@ -218,6 +242,19 @@ public class GameManagement : MonoBehaviour
 
     }
 
+    public bool AreAllElementsNull(List<GameObject> list)
+    {
+        if (list == null || list.Count == 0) return false;
+
+        foreach (var element in list)
+        {
+            if (element != null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private void BoolTriggeringHandler()
     {
@@ -250,9 +287,9 @@ public class GameManagement : MonoBehaviour
 
 
         // AFTER PASSING IMPASSABLE TERRAIN
-        if (hasPassedTutorialsBeenTriggered && !hasPassedTutorialsStarted)
+        if (hasPassedTutorialBeenTriggered && !hasPassedTutorialStarted)
         {
-            hasPassedTutorialsStarted = true;
+            hasPassedTutorialStarted = true;
             StartCoroutine(S_AfterPassingImpassableTerrain());
         }
 
@@ -266,9 +303,9 @@ public class GameManagement : MonoBehaviour
         }
 
         // FINISHING A ROOM WITH CLIPPY
-        if (hasFinishedARoomWithClippyTriggered && !hasFinishedARoomWithClippyStarted)
+        if (hasLeftTheRoomWithClippyTriggered && !hasLeftTheRoomWithClippyStarted)
         {
-            hasFinishedARoomWithClippyStarted = true;
+            hasLeftTheRoomWithClippyStarted = true;
             StartCoroutine(S_AfterFinishingARoomWithClippy());
         }
 
@@ -311,7 +348,6 @@ public class GameManagement : MonoBehaviour
         }
 
         // ENTERING NETWORK CARD ROOM
-
         if (hasEnteredNetworkCardRoomTriggered && !hasEnteredNetworkCardRoomStarted)
         {
             hasEnteredNetworkCardRoomStarted = true;
@@ -351,25 +387,6 @@ public class GameManagement : MonoBehaviour
     }
 
 
-    // ENEMY CHECKING
-
-
-    public bool AreAllElementsNull(List<GameObject> list)
-    {
-        if (list == null || list.Count == 0) return false;
-
-        foreach (var element in list)
-        {
-            if (element != null)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-
 
 
 
@@ -407,24 +424,37 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_WhenFirstSpawned()
     {
+        Movement.isFrozen = true;
+        blackPanel.SetActive(true);
+        yield return new WaitForSeconds(2.333f);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Where am I?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "What happened?"));
+        yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I guess I'll have to go to the storage room to find out."));
     }
 
     private IEnumerator S_WhenSeeingEnemiesForFirstTime()
     {
-        yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Woah, those things weren’t here before!"));
+        yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "This place is a mess... Thankfully, I still remember how to SHOOT."));
     }
 
     private IEnumerator S_WhenSeeingImpassableTerrainForFirstTime()
     {
+        yield return new WaitForSeconds(1);
+        yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Woah, those things weren’t here before!"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Impassable terrain... Not for me though! At the driver school, they taught me how to DEFEND. "));
     }
 
+    public void ActivateZone1RightNav()
+    {
+        zone1RightNav.SetActive(true);
+    }
+
+
     private IEnumerator S_AfterPassingImpassableTerrain()
     {
+        yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I have to make my way to the storage before something else happens."));
     }
 
@@ -465,12 +495,12 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Probably we shouldn’t even be worried at this point."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "You sure?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Yes, let’s go already!"));
-
+        zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
+        isZone3Finished = true;
+        navigationHandler.DelayedResetEnterExitBools();
+        clippyFirstInteractionTrigger.SetActive(false);
     }
      
-
-
-
     public IEnumerator S_WhenInteractingWithLockedDoorOneClippy()
     {
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "It’s locked."));
@@ -515,7 +545,8 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Sorry. I meant de-fragmented! Get it? "));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Huh?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Don’t worry, we just have to get rid of this malware and you will be good."));
-        yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Even though the storage room is now dead again at least we should check what’s left there. Come on, let’s go."));
+        yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Even though the storage room is now dead again at least we should check what’s left there."));
+        zone4EnemyGroup.SetActive(true);
     }
 
     private IEnumerator S_ArrivingAtStorage()

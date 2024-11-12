@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections.Generic;
 public class PeripheralTypeHandler : MonoBehaviour
 {
     public static PeripheralType? selectedPeripheral;

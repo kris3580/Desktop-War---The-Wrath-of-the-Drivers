@@ -31,7 +31,7 @@ public class NavigationHandler : MonoBehaviour
             { null,   null,   Z[11],  Z[5],   Z[6],   Z[7],  },
             { Z[15],  Z[14],  Z[13],  Z[4],   null,   Z[8],  },
             { null,   null,   null,   Z[3],   Z[10],  Z[9],  },
-            { null,   Z[0],   Z[1],   Z[2],   null,   null,  }
+            { null,   Z[0],   Z[1],   Z[2],   null,   null,  }  
         };
 
         gameManagement = FindObjectOfType<GameManagement>();
@@ -56,7 +56,26 @@ public class NavigationHandler : MonoBehaviour
     {
         if (dialogueSystem.isInDialogue) return;
 
-        // doors that are locked forever
+
+
+        // TRIGGER DIALOGUES
+
+        if (other.name == "AfterDefendingTrigger")
+        {
+            gameManagement.ActivateZone1RightNav();
+            return;
+        }
+
+        if (other.name == "ClippyFirstInteractionTrigger" && gameManagement.AreAllElementsNull(gameManagement.zone3EnemyList) && !gameManagement.isZone3Finished)
+        {
+            gameManagement.isClippyWithYou = true;
+        }
+
+
+
+
+
+            // doors that are locked forever
 
         if (other.name == "NAV_RIGHT" && xNav == 3 && yNav == 4)
         {
@@ -117,10 +136,6 @@ public class NavigationHandler : MonoBehaviour
 
             return;
         }
-
-
-
-
 
 
         // usual cases

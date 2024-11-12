@@ -27,11 +27,6 @@ public class DialogueSystem : MonoBehaviour
     }
 
 
-    private void TypeText(string speaker, string dialogue)
-    {
-        StartCoroutine(TypeTextRoutine(speaker, dialogue));
-    }
-
 
     public IEnumerator TypeTextRoutine(string speaker, string dialogue)
     {
