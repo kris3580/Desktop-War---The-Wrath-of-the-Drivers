@@ -24,10 +24,6 @@ public class SettingsManager : MonoBehaviour
             Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
         }
 
-        // TODO: CONNECT VOLUME TO SOUND MANAGER
-
-
-
     }
 
 }

@@ -74,7 +74,6 @@ public class NavigationHandler : MonoBehaviour
         if (other.name == "ClippySecondInteractionTrigger")
         {
             gameManagement.isClippyWithYouAgain = true;
-            Debug.Log("bruh");
         }
 
 

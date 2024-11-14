@@ -726,6 +726,8 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Is there a problem?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "No, it’s just... This isn’t going to last. The user is going to repeat this cycle all over again."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I guess we are going to find out after the restart."));
+
+        SceneManagement.LoadScene("Menu", 5f);
     }
 
 }
