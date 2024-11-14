@@ -79,6 +79,7 @@ public class GameManagement : MonoBehaviour
     [SerializeField] private GameObject zone1RightNav;
     [SerializeField] private GameObject clippyFirstInteractionTrigger;
     [SerializeField] private GameObject zone4EnemyGroup;
+    [SerializeField] private GameObject zone6EnemyGroup;
 
     [SerializeField] private List<GameObject> zones;
 
@@ -135,6 +136,12 @@ public class GameManagement : MonoBehaviour
         {
             hasArrivedAtStorageTriggered = true;
         }
+
+        if (navigationHandler.xNav == 4 && navigationHandler.yNav == 1)
+        {
+            hasLeftStorageTriggered = true;
+        }
+
 
     }
 
@@ -575,6 +582,7 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_AfterLeavingStorage()
     {
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Soo, where are we going now?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Oh yeah, dead guy told me we need to download an antivirus, launch it, and see what’s what."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "We need to fight our way to the PCI room and pray the guys there are left uninfected by the virus."));
@@ -582,6 +590,7 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Yes, and then we will have to access the god-forsaken world beyond our realm -  the Internet."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Is it that bad?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Yes, but also no. It depends on what you look at I guess. Let’s go."));
+        zone6EnemyGroup.SetActive(true);
     }
 
     private IEnumerator S_EnteringVideoCardRoom()

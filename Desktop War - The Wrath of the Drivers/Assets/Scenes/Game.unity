@@ -5187,6 +5187,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392488991}
   m_CullTransparentMesh: 1
+--- !u!1 &399619610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399619611}
+  m_Layer: 0
+  m_Name: Zone6EnemyGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399619611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399619610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1091626857}
+  m_Father: {fileID: 1902609554}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &407437775
 GameObject:
   m_ObjectHideFlags: 0
@@ -15478,7 +15510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1091626857
 Transform:
   m_ObjectHideFlags: 0
@@ -15493,7 +15525,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 647208195}
-  m_Father: {fileID: 1902609554}
+  m_Father: {fileID: 399619611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1091626858
 MonoBehaviour:
@@ -25966,6 +25998,7 @@ MonoBehaviour:
   zone1RightNav: {fileID: 467007725}
   clippyFirstInteractionTrigger: {fileID: 935542285}
   zone4EnemyGroup: {fileID: 483410415}
+  zone6EnemyGroup: {fileID: 399619610}
   zones:
   - {fileID: 927280817}
   - {fileID: 2093875131}
@@ -26843,7 +26876,7 @@ Transform:
   m_Children:
   - {fileID: 1142024427}
   - {fileID: 898830821}
-  - {fileID: 1091626857}
+  - {fileID: 399619611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920744396
