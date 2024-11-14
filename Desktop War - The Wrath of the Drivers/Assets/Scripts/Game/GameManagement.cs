@@ -78,9 +78,11 @@ public class GameManagement : MonoBehaviour
     [SerializeField] private GameObject blackPanel;
     [SerializeField] private GameObject zone1RightNav;
     [SerializeField] private GameObject clippyFirstInteractionTrigger;
+    [SerializeField] private GameObject clippySecondInteractionTrigger;
     [SerializeField] private GameObject zone4EnemyGroup;
     [SerializeField] private GameObject zone6EnemyGroup;
 
+    [SerializeField] private GameObject startZone;
     [SerializeField] private List<GameObject> zones;
 
     [SerializeField] private List<GameObject> zone2EnemyList;
@@ -142,6 +144,26 @@ public class GameManagement : MonoBehaviour
             hasLeftStorageTriggered = true;
         }
 
+        if (navigationHandler.xNav == 5 && navigationHandler.yNav == 3)
+        {
+            hasEnteredVideoCardRoomTriggered = true;
+        }
+
+        if (navigationHandler.xNav == 4 && navigationHandler.yNav == 3)
+        {
+            hasEnteredNetworkCardRoomTriggered = true;
+        }
+
+        if (navigationHandler.xNav == 3 && navigationHandler.yNav == 1 && hasBeatenNetworkCard)
+        {
+            hasArrivedAtStorageAgainTriggered = true;
+        }
+
+        if (navigationHandler.xNav == 0 && navigationHandler.yNav == 2)
+        {
+            hasEnteredProcessorRoomTriggered = true;
+        }
+
 
     }
 
@@ -196,6 +218,7 @@ public class GameManagement : MonoBehaviour
             zones[6].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
             isZone9Finished = true;
             navigationHandler.DelayedResetEnterExitBools();
+            hasBeatenVideoCard = true;
         }
 
         // ZONE 10
@@ -204,6 +227,7 @@ public class GameManagement : MonoBehaviour
             zones[7].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
             isZone10Finished = true;
             navigationHandler.DelayedResetEnterExitBools();
+            hasBeatenNetworkCard = true;
         }
 
         // ZONE 11
@@ -241,9 +265,10 @@ public class GameManagement : MonoBehaviour
         // ZONE 15
         if (AreAllElementsNull(zone15EnemyList) && !isZone15Finished)
         {
-            zones[12].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
+            //zones[12].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
             isZone15Finished = true;
             navigationHandler.DelayedResetEnterExitBools();
+            hasGameEndedTriggered = true;
         }
 
 
@@ -603,9 +628,18 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_AfterBeatingVideoCard()
     {
+        zones[6].SetActive(false);
+        startZone.transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(false);
+        startZone.SetActive(true);
+        navigationHandler.xNav = 1; navigationHandler.yNav = 4;
+        zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(false);
+        clippySecondInteractionTrigger.SetActive(true);
+        yield return new WaitForSeconds(2);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Huh? I’m here again? "));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Wait... I can remember, I must have beat him..."));
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I should search for Clippy."));
+        startZone.transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
     }
 
     private IEnumerator S_FindingClippy()
@@ -627,6 +661,8 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("", "..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I think we should keep going."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Let’s go."));
+        clippySecondInteractionTrigger.SetActive(false);
+        zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
     }
 
     private IEnumerator S_ConfrontingNetworkCard()
