@@ -12,14 +12,35 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] float bulletSpeed = 5f;
     [SerializeField] float spiralAngleStep = 15f;
 
-    private float angleOffset = 0f;     
+    private float angleOffset = 0f;
 
+    private Coroutine spawnCoroutine;
 
     private void Start()
     {
         bulletPrefab = Resources.Load<GameObject>("Bullet");
         StartCoroutine(SpawnBullets());
     }
+
+
+    private void OnEnable()
+    {
+        if (spawnCoroutine == null)
+        {
+            spawnCoroutine = StartCoroutine(SpawnBullets());
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
+    }
+
+
 
     IEnumerator SpawnBullets()
     {
@@ -43,17 +64,17 @@ public class BulletSpawner : MonoBehaviour
 
     void SpawnLinePattern()
     {
+
         for (int i = 0; i < bulletCount; i++)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(i * 0.5f, 0, 0);
+            Vector3 spawnPosition = transform.position + transform.right * i * 0.5f;
             GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
-            bullet.GetComponent<Bullet>().SetDirection(Vector3.right, bulletSpeed);
+            bullet.GetComponent<Bullet>().SetDirection(transform.right, bulletSpeed);
         }
     }
 
     void SpawnCirclePattern()
     {
-        // Instantiate bullets in a circular pattern
         for (int i = 0; i < bulletCount; i++)
         {
             float angle = i * Mathf.PI * 2f / bulletCount; 

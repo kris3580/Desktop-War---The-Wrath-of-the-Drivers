@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class NavigationHandler : MonoBehaviour
 
     GameManagement gameManagement;
     DialogueSystem dialogueSystem;
+    ClippyFollow clippyFollow;
 
     [SerializeField] public Texture permittedHighlight;
     [SerializeField] public Texture forbiddenHighlight;
@@ -36,7 +38,7 @@ public class NavigationHandler : MonoBehaviour
 
         gameManagement = FindObjectOfType<GameManagement>();
         dialogueSystem = FindObjectOfType<DialogueSystem>();
-
+        clippyFollow = FindObjectOfType<ClippyFollow>();
     }
 
     private void ResetEnterExitBools()
@@ -152,28 +154,32 @@ public class NavigationHandler : MonoBehaviour
             {
                 yNav--;
                 transform.position = new Vector3(transform.position.x, 1.994f, transform.position.z);
+                clippyFollow.SetClippyPositionNextToPlayer();
             }
             else if (other.name == "NAV_DOWN")
             {
                 yNav++;
                 transform.position = new Vector3(transform.position.x, 6.526f, transform.position.z);
+                clippyFollow.SetClippyPositionNextToPlayer();
             }
             else if (other.name == "NAV_LEFT")
             {
                 xNav--;
                 transform.position = new Vector3(4.53f, transform.position.y, transform.position.z);
+                clippyFollow.SetClippyPositionNextToPlayer();
             }
             else if (other.name == "NAV_RIGHT")
             {
                 xNav++;
                 transform.position = new Vector3(-4.531f, transform.position.y, transform.position.z);
+                clippyFollow.SetClippyPositionNextToPlayer();
             }
 
             map[yNav, xNav].SetActive(true);
 
             enterExitBools[0] = true;
 
-
+            DestroyAllBullets();
 
         }
         else if (enterExitBools[0] && !enterExitBools[1] && (other.name == "NAV_UP" || other.name == "NAV_DOWN" || other.name == "NAV_LEFT" || other.name == "NAV_RIGHT"))
@@ -192,6 +198,31 @@ public class NavigationHandler : MonoBehaviour
             enterExitBools[1] = false;
         }
     }
+
+    private void DestroyAllBullets()
+    {
+        List<string> tagsToDestroy = new List<string>
+        {
+            "Bullet", "PlayerBullet"
+        };
+
+        List<GameObject> objectsToDestroy = new List<GameObject>();
+
+        foreach (string tag in tagsToDestroy)
+        {
+            GameObject[] foundObjects = GameObject.FindGameObjectsWithTag(tag);
+            objectsToDestroy.AddRange(foundObjects);
+        }
+
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            Destroy(obj);
+        }
+    }
+
+
+
+
 
 
 }

@@ -21,10 +21,9 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     [SerializeField] public static bool isInStore = false;
 
-
     [SerializeField] GameObject extraSpeedSymbol;
 
-    public static int coins = 150;
+    public static int coins = 0;
     [SerializeField] TextMeshProUGUI coinsText;
     [SerializeField] TextMeshProUGUI storeCoinsText;
 
@@ -43,6 +42,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     private Memory memory;
     private Movement movement;
     private DialogueSystem dialogueSystem;
+    private NavigationHandler navigationHandler;
 
     [SerializeField] float upgradedMoveSpeed;
 
@@ -132,6 +132,27 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         DoubleClickHandler();
         KeepWindowOnScreen();
         CameraAnimationHandler();
+        ShowStoreIfInCorrectZone();
+        UpdateDebugBitflips();
+
+    }
+
+    private void UpdateDebugBitflips()
+    {
+        coinsText.text = $"DRIVER_AVAILABLE_BITFLIPS: {coins}bfs";
+    }
+
+
+    private void ShowStoreIfInCorrectZone()
+    {
+        if (navigationHandler.xNav == 3 && navigationHandler.yNav == 1)
+        {
+            desktopIcon.SetActive(true);
+        }
+        else
+        {
+            desktopIcon.SetActive(false);
+        }
     }
 
     private void Start()
@@ -141,6 +162,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
         memory = FindObjectOfType<Memory>();
         movement = FindObjectOfType<Movement>();
         dialogueSystem = FindObjectOfType<DialogueSystem>();
+        navigationHandler = FindObjectOfType<NavigationHandler>();
 
         positionA = mainCamera.transform.position;
         rotationA = mainCamera.transform.rotation;

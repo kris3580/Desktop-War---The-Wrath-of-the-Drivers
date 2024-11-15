@@ -12,6 +12,7 @@ public class GameManagement : MonoBehaviour
     DialogueSystem dialogueSystem;
     NavigationHandler navigationHandler;
     SFXHandler sfxHandler;
+    ClippyFollow clippyFollow;
 
     public bool hasGameStartAnimationFinished = false;
     public bool hasGameStarted = false;
@@ -109,6 +110,9 @@ public class GameManagement : MonoBehaviour
         dialogueSystem = FindObjectOfType<DialogueSystem>();
         navigationHandler = FindObjectOfType<NavigationHandler>();
         sfxHandler = FindObjectOfType<SFXHandler>();
+        clippyFollow = FindObjectOfType<ClippyFollow>();
+        Store.coins = 150;
+
 
         hasGameStartAnimationFinished = true;
     }
@@ -270,7 +274,6 @@ public class GameManagement : MonoBehaviour
         // ZONE 15
         if (AreAllElementsNull(zone15EnemyList) && !isZone15Finished)
         {
-            //zones[12].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
             isZone15Finished = true;
             navigationHandler.DelayedResetEnterExitBools();
             hasGameEndedTriggered = true;
@@ -543,6 +546,7 @@ public class GameManagement : MonoBehaviour
         isZone3Finished = true;
         navigationHandler.DelayedResetEnterExitBools();
         clippyFirstInteractionTrigger.SetActive(false);
+        clippyFollow.SetFollowPlayer();
     }
      
     public IEnumerator S_WhenInteractingWithLockedDoorOneClippy()
@@ -596,6 +600,7 @@ public class GameManagement : MonoBehaviour
     private IEnumerator S_ArrivingAtStorage()
     {
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Here we are. This looks pretty dead. "));
+        clippyFollow.MoveToStorage();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Oh, here are my textures."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Damn."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "This is pretty sad."));
@@ -611,10 +616,12 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "I mean I get that, false positives and all. Why not just pay for the software?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Hey, a multi-billion dollar corporation made you, you wouldn’t get it."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "I mean, yeah, but still. This guy makes our job a lot more harder than it needs to be."));
+        clippyFollow.MoveNextToStore();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "What’s this thing though?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "A store... at the storage. That’s not even funny. Who came up with that?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Should we...?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Yeah of course! Double click on it and check what’s up!"));
+        clippyFollow.SetFollowPlayer();
     }
 
     private IEnumerator S_AfterLeavingStorage()
@@ -647,6 +654,8 @@ public class GameManagement : MonoBehaviour
         zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(false);
         clippySecondInteractionTrigger.SetActive(true);
         if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(2);
+        clippyFollow.GoToSpawnpoint();
+        blackPanel.SetActive(false); blackPanel.SetActive(true);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Huh? I’m here again? "));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Wait... I can remember, I must have beat him..."));
         if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(0.5f);
@@ -664,7 +673,7 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "They don’t guarantee security. Reinstalling the OS does though. "));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "But... that means..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Reinstalling the OS is out of the question though."));
-        yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "But yeah. We will be gone, but it’s fine because we exist for the user, and die for the user."));
+        yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "But yeah. In that case we will be gone, but it’s fine because we exist for the user, and die for the user."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "And then be reborn again, only to probably go through the same thing all over."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Sounds kind of depressing. Maybe It’s a good thing that I can't remember everything."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Yeah, that’s how most guys on this system get around."));
@@ -675,16 +684,19 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Let’s go."));
         clippySecondInteractionTrigger.SetActive(false);
         zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
+        clippyFollow.SetFollowPlayer();
     }
 
     private IEnumerator S_ConfrontingNetworkCard()
     {
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Looks like the network card is corrupted too."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Distract him, I will download the antivirus while you’re at it."));
+        clippyFollow.MoveOutOfBounds();
     }
 
     private IEnumerator S_AfterBeatingNetworkCard()
     {
+        clippyFollow.SetFollowPlayer();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Well done! The connection to the Internet is down, but I downloaded the antivirus just in time!"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Nice! So It’s all over now?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Let’s see..."));
@@ -729,10 +741,12 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "I’m starting the antivirus."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I’m not sure that I can do it..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Come on, driver, we have been in a desktop war for a while, where is your wrath? Let’s do this!"));
+        clippyFollow.MoveOutOfBounds();
     }
 
     private IEnumerator S_End()
     {
+        clippyFollow.SetFollowPlayer();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "We did it!"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Yes we did it..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Is there a problem?"));

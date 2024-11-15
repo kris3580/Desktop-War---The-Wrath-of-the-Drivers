@@ -32,6 +32,9 @@ public class Pause : MonoBehaviour
         }
         else
         {
+            pauseMenuPanel.SetActive(true);
+            settingsMenuPanel.SetActive(false);
+
             graphicRaycaster.enabled = false;
             Time.timeScale = 1f;
             pausePanel.SetActive(false);
