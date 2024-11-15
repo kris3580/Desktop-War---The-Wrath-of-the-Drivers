@@ -9,6 +9,8 @@ public class KeyboardModelKeys : MonoBehaviour
 
     private void Update()
     {
+        if (Pause.isPaused) return;
+
         UpdateKeyMaterial(0, KeyCode.W);
         UpdateKeyMaterial(1, KeyCode.A);
         UpdateKeyMaterial(2, KeyCode.S);

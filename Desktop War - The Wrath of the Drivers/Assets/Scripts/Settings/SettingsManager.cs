@@ -4,13 +4,14 @@ public class SettingsManager : MonoBehaviour
 {
     public static float volume = 1f;
     public static int isFullscreenOn = 1;
+    public static bool isSkipDialogueActive = false;
 
     private void Start()
     {
         SetSettings();
     }
 
-    private void SetSettings()
+    private static void SetSettings()
     {
         volume = PlayerPrefs.GetFloat("volume");
         isFullscreenOn = PlayerPrefs.GetInt("isFullscreenOn");

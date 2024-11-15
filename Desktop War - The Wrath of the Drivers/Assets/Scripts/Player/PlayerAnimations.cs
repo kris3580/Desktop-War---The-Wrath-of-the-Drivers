@@ -148,6 +148,7 @@ public class PlayerAnimations : MonoBehaviour
     private void LeanHandler()
     {
         if (Movement.isFrozen) return;
+        if (Pause.isPaused) return;
 
         rotation = playerModelsObject.transform.localEulerAngles;
 

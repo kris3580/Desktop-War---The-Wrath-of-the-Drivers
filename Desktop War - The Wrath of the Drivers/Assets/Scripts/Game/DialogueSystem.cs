@@ -30,7 +30,10 @@ public class DialogueSystem : MonoBehaviour
 
     public IEnumerator TypeTextRoutine(string speaker, string dialogue)
     {
+        if (SettingsManager.isSkipDialogueActive) yield break;
+
         if (isInDialogue) yield break;
+        
 
         StartCoroutine(FindObjectOfType<Cursor>().DelayedReturnToDefaultCursor());
 

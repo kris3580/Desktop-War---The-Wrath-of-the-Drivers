@@ -14,7 +14,7 @@ public class Cursor : MonoBehaviour
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
+        currentTime += Time.unscaledDeltaTime;
     }
 
     private void Awake()

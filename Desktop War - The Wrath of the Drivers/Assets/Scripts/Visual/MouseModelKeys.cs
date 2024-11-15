@@ -9,6 +9,8 @@ public class MouseModelKeys : MonoBehaviour
 
     private void Update()
     {
+        if (Pause.isPaused) return;
+
         UpdateKeyMaterial(0, 0);
         UpdateKeyMaterial(1, 1);
     }

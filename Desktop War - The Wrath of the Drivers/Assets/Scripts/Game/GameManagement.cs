@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GameManagement : MonoBehaviour
 {
+    [SerializeField] GameObject keysKeyboardImage;
+    [SerializeField] GameObject rightClickMouseImage;
+    [SerializeField] GameObject leftClickMouseImage;
+
     DialogueSystem dialogueSystem;
     NavigationHandler navigationHandler;
     SFXHandler sfxHandler;
@@ -178,6 +182,7 @@ public class GameManagement : MonoBehaviour
             isZone2Finished = true;
             navigationHandler.DelayedResetEnterExitBools();
             hasPassedTutorialBeenTriggered = true;
+            leftClickMouseImage.SetActive(false);
         }
 
         // ZONE 4
@@ -456,26 +461,32 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_WhenFirstSpawned()
     {
-        Movement.isFrozen = true;
+        if (!SettingsManager.isSkipDialogueActive) Movement.isFrozen = true;
         blackPanel.SetActive(true);
         yield return new WaitForSeconds(2.333f);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Where am I?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "What happened?"));
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I guess I'll have to go to the storage room to find out."));
+        keysKeyboardImage.SetActive(true);
+
     }
 
     private IEnumerator S_WhenSeeingEnemiesForFirstTime()
     {
-        yield return new WaitForSeconds(1);
+        rightClickMouseImage.SetActive(false);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "This place is a mess... Thankfully, I still remember how to SHOOT."));
+        leftClickMouseImage.SetActive(true);
     }
 
     private IEnumerator S_WhenSeeingImpassableTerrainForFirstTime()
     {
-        yield return new WaitForSeconds(1);
+        keysKeyboardImage.SetActive(false);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Woah, those things weren’t here before!"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Impassable terrain... Not for me though! At the driver school, they taught me how to DEFEND. "));
+        rightClickMouseImage.SetActive(true);
     }
 
     public void ActivateZone1RightNav()
@@ -486,7 +497,8 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_AfterPassingImpassableTerrain()
     {
-        yield return new WaitForSeconds(1);
+        
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I have to make my way to the storage before something else happens."));
     }
 
@@ -511,13 +523,13 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "I don’t remember all this, but the state of this place gives me a déjà vu. The computer must have restarted."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "We really need to get to the storage room to find out what happened."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "No need, I have a direct line to them! Lemme give them a call."));
-        StartCoroutine(sfxHandler.CallingSFX(2));
+        if (!SettingsManager.isSkipDialogueActive) StartCoroutine(sfxHandler.CallingSFX(2));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("", "..."));
-        yield return new WaitForSeconds(1);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("", "..."));
-        yield return new WaitForSeconds(1);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(1);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("", "..."));
-        StartCoroutine(sfxHandler.CallingSFX(0.5f));
+        if (!SettingsManager.isSkipDialogueActive) StartCoroutine(sfxHandler.CallingSFX(0.5f));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "No response. So it’s that bad. Guess we’ll have to walk there on foot."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Sorry for asking, have you always looked like..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Like what?"));
@@ -554,7 +566,7 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_AfterFinishingARoomWithClippy()
     {
-        sfxHandler.Play(10);
+        if (!SettingsManager.isSkipDialogueActive) sfxHandler.Play(10);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Oh someone is calling."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "It’s the guys from the storage room! Let’s see..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Yeah...?"));
@@ -568,9 +580,9 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Oh yeah?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "No, but i have a driver with me."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Alright, one more thing-"));
-        sfxHandler.Play(8);
+        if (!SettingsManager.isSkipDialogueActive) sfxHandler.Play(8);
         yield return new WaitForSeconds(2);
-        StartCoroutine(sfxHandler.CallingSFX(0.5f));
+        if (!SettingsManager.isSkipDialogueActive) StartCoroutine(sfxHandler.CallingSFX(0.5f));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), " What was that on the phone?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Looks like the other guy exploded too."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "What?"));
@@ -607,7 +619,7 @@ public class GameManagement : MonoBehaviour
 
     private IEnumerator S_AfterLeavingStorage()
     {
-        yield return new WaitForSeconds(0.5f);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Soo, where are we going now?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Oh yeah, dead guy told me we need to download an antivirus, launch it, and see what’s what."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "We need to fight our way to the PCI room and pray the guys there are left uninfected by the virus."));
@@ -634,10 +646,10 @@ public class GameManagement : MonoBehaviour
         navigationHandler.xNav = 1; navigationHandler.yNav = 4;
         zones[1].transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(false);
         clippySecondInteractionTrigger.SetActive(true);
-        yield return new WaitForSeconds(2);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(2);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Huh? I’m here again? "));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Wait... I can remember, I must have beat him..."));
-        yield return new WaitForSeconds(0.5f);
+        if (!SettingsManager.isSkipDialogueActive) yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I should search for Clippy."));
         startZone.transform.Find("NavDirectionMarkings").transform.gameObject.SetActive(true);
     }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MenuButtons : MonoBehaviour
@@ -17,6 +18,17 @@ public class MenuButtons : MonoBehaviour
         SFXHandler.Instance.Play(1);
         SceneManagement.LoadScene("EXIT GAME!", 1f);
     }
+
+
+    
+
+    public void SkipDialogueButtonHandler()
+    {
+        SFXHandler.Instance.Play(1);
+
+        SettingsManager.isSkipDialogueActive = !SettingsManager.isSkipDialogueActive;
+    }
+
 
     public void OpenSettings()
     {
@@ -140,6 +152,7 @@ public class MenuButtons : MonoBehaviour
     private void Update()
     {
         CameraAnimationHandler();
+        Debug.Log(SettingsManager.isSkipDialogueActive);
     }
 
     private void CameraAnimationHandler()

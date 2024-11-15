@@ -12,7 +12,7 @@ public class SFX : MonoBehaviour
 
     private void Update()
     {
-        timePassed += Time.deltaTime;
+        timePassed += Time.unscaledDeltaTime;
 
         if (timePassed >= timeToWaitUntilDestroy)
         {
