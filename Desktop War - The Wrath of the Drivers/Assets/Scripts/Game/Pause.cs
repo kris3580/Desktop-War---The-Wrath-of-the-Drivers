@@ -28,13 +28,14 @@ public class Pause : MonoBehaviour
             graphicRaycaster.enabled = true;
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
+            OSTHandler.Instance.audioSource.Pause();
 
         }
         else
         {
             pauseMenuPanel.SetActive(true);
             settingsMenuPanel.SetActive(false);
-
+            OSTHandler.Instance.audioSource.UnPause();
             graphicRaycaster.enabled = false;
             Time.timeScale = 1f;
             pausePanel.SetActive(false);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OSTHandler : MonoBehaviour
 {
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     private bool isTransitioning = false;
     [SerializeField] private List<AudioClip> songs;
     [SerializeField] private float testTransitionTime;

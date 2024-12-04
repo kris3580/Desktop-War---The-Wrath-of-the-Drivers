@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    public enum PatternType { Line, Circle, FourWaySpiral }
+    public enum PatternType { Line, Circle, FourWaySpiral, ShootAtPlayer }
     [SerializeField] PatternType patternType;
 
     private GameObject bulletPrefab;
@@ -13,15 +13,20 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] float spiralAngleStep = 15f;
 
     private float angleOffset = 0f;
-
     private Coroutine spawnCoroutine;
+    private Transform playerTransform;
 
     private void Start()
     {
-        bulletPrefab = Resources.Load<GameObject>("Bullet");
-        StartCoroutine(SpawnBullets());
+        playerTransform = GameObject.Find("Player").transform;
+
+        spawnCoroutine = StartCoroutine(SpawnBullets());
     }
 
+    private void Awake()
+    {
+        bulletPrefab = Resources.Load<GameObject>("Bullet");
+    }
 
     private void OnEnable()
     {
@@ -40,8 +45,6 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
-
-
     IEnumerator SpawnBullets()
     {
         while (true)
@@ -57,6 +60,9 @@ public class BulletSpawner : MonoBehaviour
                 case PatternType.FourWaySpiral:
                     SpawnFourWaySpiralPattern();
                     break;
+                case PatternType.ShootAtPlayer:
+                    SpawnShootAtPlayerPattern();
+                    break;
             }
             yield return new WaitForSeconds(1f / fireRate);
         }
@@ -64,7 +70,6 @@ public class BulletSpawner : MonoBehaviour
 
     void SpawnLinePattern()
     {
-
         for (int i = 0; i < bulletCount; i++)
         {
             Vector3 spawnPosition = transform.position + transform.right * i * 0.5f;
@@ -77,10 +82,10 @@ public class BulletSpawner : MonoBehaviour
     {
         for (int i = 0; i < bulletCount; i++)
         {
-            float angle = i * Mathf.PI * 2f / bulletCount; 
-            Vector3 spawnDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0); 
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity); 
-            bullet.GetComponent<Bullet>().SetDirection(spawnDir, bulletSpeed); 
+            float angle = i * Mathf.PI * 2f / bulletCount;
+            Vector3 spawnDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bullet.GetComponent<Bullet>().SetDirection(spawnDir, bulletSpeed);
         }
     }
 
@@ -95,5 +100,14 @@ public class BulletSpawner : MonoBehaviour
         }
 
         angleOffset += spiralAngleStep;
+    }
+
+    void SpawnShootAtPlayerPattern()
+    {
+        if (playerTransform == null) return;
+
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(directionToPlayer, bulletSpeed);
     }
 }

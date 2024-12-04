@@ -62,6 +62,7 @@ public class HealthSystem : MonoBehaviour
         if(currentHealth <= 0)
         {
             SFXHandler.Instance.Play(7);
+            OSTHandler.Instance.audioSource.Stop();
             SceneManager.LoadScene("GameOver");
         }
     }
@@ -97,6 +98,12 @@ public class HealthSystem : MonoBehaviour
                 stabilityText.text = $"DRIVER_STABILITY: {percentage}%";
             }
         }
+    }
+
+
+    public void InvulnerabilityToggleHandler()
+    {
+        isSystemActive = !isSystemActive;
     }
 
 

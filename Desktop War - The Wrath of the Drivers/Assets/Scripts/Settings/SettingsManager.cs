@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
 {
-    public static float volume = 1f;
+    public static float volume = 0.7f;
     public static int isFullscreenOn = 1;
     public static bool isSkipDialogueActive = false;
 

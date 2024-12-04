@@ -111,7 +111,7 @@ public class GameManagement : MonoBehaviour
         navigationHandler = FindObjectOfType<NavigationHandler>();
         sfxHandler = FindObjectOfType<SFXHandler>();
         clippyFollow = FindObjectOfType<ClippyFollow>();
-        Store.coins = 150;
+        Store.coins = 200;
 
 
         hasGameStartAnimationFinished = true;
@@ -643,6 +643,8 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Looks like the guys are infected. The goddamn video card is here too! You need to fight it!"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "What, me?"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Well no, it’s gonna be me, who can’t even defend himself. Now fight it, or die trying!"));
+        zone9EnemyList[0].SetActive(true);
+
     }
 
     private IEnumerator S_AfterBeatingVideoCard()
@@ -692,6 +694,8 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Looks like the network card is corrupted too."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Distract him, I will download the antivirus while you’re at it."));
         clippyFollow.MoveOutOfBounds();
+        yield return new WaitForSeconds(1);
+        zone10EnemyList[0].SetActive(true);
     }
 
     private IEnumerator S_AfterBeatingNetworkCard()
@@ -742,10 +746,13 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "I’m not sure that I can do it..."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Come on, driver, we have been in a desktop war for a while, where is your wrath? Let’s do this!"));
         clippyFollow.MoveOutOfBounds();
+        OSTHandler.Instance.SetSong(3, 0);
+        zone15EnemyList[0].SetActive(true);
     }
 
     private IEnumerator S_End()
     {
+        OSTHandler.Instance.audioSource.Stop();
         clippyFollow.SetFollowPlayer();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "We did it!"));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "Yes we did it..."));
