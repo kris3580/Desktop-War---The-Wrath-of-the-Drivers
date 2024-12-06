@@ -104,6 +104,10 @@ public class GameManagement : MonoBehaviour
     [SerializeField] private List<GameObject> zone14EnemyList;
     [SerializeField] private List<GameObject> zone15EnemyList;
 
+    [SerializeField] private GameObject[] fires;
+    [SerializeField] private GameObject fallingBugs;
+
+
 
     private void Start()
     {
@@ -376,6 +380,11 @@ public class GameManagement : MonoBehaviour
         {
             hasComputerRestarted = true;
             isClippyWithYou = false;
+            foreach (GameObject fire in fires)
+            {
+                fire.SetActive(true);
+                fallingBugs.SetActive(false);
+            }
             StartCoroutine(S_AfterBeatingVideoCard());
         }
 
