@@ -602,6 +602,7 @@ public class GameManagement : MonoBehaviour
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Here we are. This looks pretty dead. "));
         clippyFollow.MoveToStorage();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("NULL", "Oh, here are my textures."));
+        clippyFollow.TurnNullToClippy();
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Damn."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine("Clippy", "This is pretty sad."));
         yield return StartCoroutine(dialogueSystem.TypeTextRoutine(GetPlayerName(), "Why?"));

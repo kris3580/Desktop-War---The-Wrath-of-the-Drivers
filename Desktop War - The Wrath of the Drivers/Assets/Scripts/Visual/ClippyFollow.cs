@@ -12,10 +12,11 @@ public class ClippyFollow : MonoBehaviour
     [SerializeField] private GameObject storagePoint;
     [SerializeField] private GameObject outOfBoundsPoint;
     [SerializeField] private GameObject storePoint;
+    [SerializeField] private GameObject clippyModel;
 
     private GameObject target;
     private Vector3 spawnPoint;
-    [SerializeField] private MeshRenderer modelRenderer;
+    [SerializeField] private GameObject nullModel;
 
 
     private void Start()
@@ -41,7 +42,8 @@ public class ClippyFollow : MonoBehaviour
 
     public void SetFollowPlayer()
     {
-        modelRenderer.enabled = true;
+        if (nullModel != null) nullModel.SetActive(true);
+        else clippyModel.SetActive(true);
         target = player;
     }
 
@@ -62,12 +64,18 @@ public class ClippyFollow : MonoBehaviour
 
     public void GoToSpawnpoint()
     {
-        modelRenderer.enabled = false;
+        if (nullModel != null) nullModel.SetActive(false); 
+        else clippyModel.SetActive(false);
+
         target = null;
         transform.position = spawnPoint;
     }
 
 
-
+    public void TurnNullToClippy()
+    {
+        Destroy(nullModel);
+        clippyModel.SetActive(true);
+    }
 
 }
