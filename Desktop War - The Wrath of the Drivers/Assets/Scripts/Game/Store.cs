@@ -137,6 +137,14 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
 
     }
 
+    public static void AddCoins(int coinsToAdd)
+    {
+        coins += coinsToAdd;
+    }
+
+
+
+
     private void UpdateDebugBitflips()
     {
         coinsText.text = $"DRIVER_AVAILABLE_BITFLIPS: {coins}bfs";
@@ -264,7 +272,7 @@ public class Store : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     {
         if (!isItemAvailableToBuy[1]) return;
 
-        memory.LevelHandler(1);
+        memory.AddMemory(1);
         SFXHandler.Instance.Play(2);
         BitflipHandler(-storePrices[1]);
         UpdateItemsAvailability();

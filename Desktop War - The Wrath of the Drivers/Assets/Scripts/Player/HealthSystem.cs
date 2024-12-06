@@ -13,9 +13,11 @@ public class HealthSystem : MonoBehaviour
     public bool isSystemActive = true;
     public int currentMaxHealth;
 
+    private DialogueSystem dialogueSystem;
     private void Start()
     {
         currentMaxHealth = maxHealth;
+        dialogueSystem = FindObjectOfType<DialogueSystem>();
     }
 
     private void Update()
@@ -35,6 +37,8 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (dialogueSystem.isInDialogue) return;
+
         if (other.tag == "Bullet")
         {
             RemoveHealth(other.gameObject);

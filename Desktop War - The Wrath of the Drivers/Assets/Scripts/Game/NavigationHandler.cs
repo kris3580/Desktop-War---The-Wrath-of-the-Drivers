@@ -22,7 +22,7 @@ public class NavigationHandler : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"{map[yNav, xNav].name} {xNav} {yNav}");
+        //Debug.Log($"{map[yNav, xNav].name} {xNav} {yNav}");
     }
 
     private void Start()

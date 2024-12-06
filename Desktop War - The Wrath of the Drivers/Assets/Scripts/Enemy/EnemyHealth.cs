@@ -14,11 +14,15 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] Color damageTextColor;
 
+    private Memory memory;
+
+
     private void Start()
     {
         damageTextPrefab = Resources.Load<GameObject>("DamageText");
         canvas = transform.Find("EnemyCanvas").gameObject.GetComponent<Canvas>();
         maxHealth = currentHealth;
+        memory = FindObjectOfType<Memory>();
 
     }
 
@@ -64,6 +68,10 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             SFXHandler.Instance.Play(18);
+            Store.AddCoins(UnityEngine.Random.Range(2, 7));
+
+            if (UnityEngine.Random.Range(0, 10) == 0) memory.AddMemory(1);
+
             Destroy(gameObject);
             
         }

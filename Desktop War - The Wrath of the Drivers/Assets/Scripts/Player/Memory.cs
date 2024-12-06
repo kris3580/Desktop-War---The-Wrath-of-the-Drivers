@@ -13,10 +13,10 @@ public class Memory : MonoBehaviour
     {
         peripheralTypeHandler = FindObjectOfType<PeripheralTypeHandler>();
 
-        LevelHandler(1);
+        AddMemory(1);
     }
 
-    public void LevelHandler(int extra)
+    public void AddMemory(int extra)
     {
         memoryCount += extra;
 

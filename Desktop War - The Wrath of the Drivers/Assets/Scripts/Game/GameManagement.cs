@@ -111,7 +111,7 @@ public class GameManagement : MonoBehaviour
         navigationHandler = FindObjectOfType<NavigationHandler>();
         sfxHandler = FindObjectOfType<SFXHandler>();
         clippyFollow = FindObjectOfType<ClippyFollow>();
-        Store.coins = 200;
+        Store.coins = 0;
 
 
         hasGameStartAnimationFinished = true;
